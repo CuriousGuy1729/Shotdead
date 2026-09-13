@@ -20,7 +20,6 @@ export class GraphicsManager {
   }
 
   init() {
-    // Renderer setup - ULTRA quality
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.autoUpdate = true;
@@ -28,147 +27,97 @@ export class GraphicsManager {
     this.renderer.toneMappingExposure = 1.15;
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.physicallyCorrectLights = true;
-    
-    // Enable anisotropic filtering globally
     THREE.Texture.DEFAULT_ANISOTROPY = 16;
-    
-    // Post-processing
+
     this.setupPostProcessing();
-    
-    // Environment map for reflections - studio lighting
     this.setupEnvironment();
-    
-    // Fog - subtle volumetric
-    this.scene.fog = new THREE.FogExp2(0x0a0e13, 0.012);
+    this.scene.fog = new THREE.FogExp2(0x06090f, 0.011);
   }
 
   setupPostProcessing() {
     const size = new THREE.Vector2();
     this.renderer.getSize(size);
-    
     this.composer = new EffectComposer(this.renderer);
-    
     const renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(renderPass);
-    
-    // SSAO - contact shadows for realism
+
     this.ssaoPass = new SSAOPass(this.scene, this.camera, size.x, size.y);
-    this.ssaoPass.kernelRadius = 0.8;
+    this.ssaoPass.kernelRadius = 0.85;
     this.ssaoPass.minDistance = 0.001;
-    this.ssaoPass.maxDistance = 0.05;
+    this.ssaoPass.maxDistance = 0.06;
     this.ssaoPass.output = SSAOPass.OUTPUT.Default;
     this.composer.addPass(this.ssaoPass);
-    
-    // Bloom - subtle for emissive
-    this.bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(size.x, size.y),
-      0.25, // strength
-      0.4,  // radius
-      0.85  // threshold
-    );
+
+    this.bloomPass = new UnrealBloomPass(new THREE.Vector2(size.x, size.y), 0.26, 0.42, 0.86);
     this.composer.addPass(this.bloomPass);
-    
-    // FXAA - anti-aliasing
+
     const fxaaPass = new ShaderPass(FXAAShader);
-    fxaaPass.material.uniforms['resolution'].value.set(1 / size.x, 1 / size.y);
+    fxaaPass.material.uniforms['resolution'].value.set(1/size.x, 1/size.y);
     this.composer.addPass(fxaaPass);
-    
-    // Output
+
     const outputPass = new OutputPass();
     this.composer.addPass(outputPass);
   }
 
   setupEnvironment() {
-    // Create PMREM for image-based lighting - studio HDRI approximation
     const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
     pmremGenerator.compileEquirectangularShader();
-    
-    // Create a simple gradient environment
     const envScene = new THREE.Scene();
     const topColor = new THREE.Color(0x1a2a4a);
-    const bottomColor = new THREE.Color(0x0a0e13);
-    
+    const bottomColor = new THREE.Color(0x06090f);
     const envGeo = new THREE.SphereGeometry(100, 32, 32);
     const envMat = new THREE.ShaderMaterial({
-      vertexShader: `
-        varying vec3 vWorldPosition;
-        void main() {
-          vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-          vWorldPosition = worldPosition.xyz;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform vec3 topColor;
-        uniform vec3 bottomColor;
-        varying vec3 vWorldPosition;
-        void main() {
-          float h = normalize(vWorldPosition).y;
-          gl_FragColor = vec4(mix(bottomColor, topColor, max(0.0, h)), 1.0);
-        }
-      `,
-      uniforms: {
-        topColor: { value: topColor },
-        bottomColor: { value: bottomColor }
-      },
+      vertexShader: `varying vec3 vWorldPosition; void main(){ vec4 worldPosition = modelMatrix * vec4(position,1.0); vWorldPosition = worldPosition.xyz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+      fragmentShader: `uniform vec3 topColor; uniform vec3 bottomColor; varying vec3 vWorldPosition; void main(){ float h = normalize(vWorldPosition).y; gl_FragColor = vec4(mix(bottomColor, topColor, max(0.0,h)),1.0); }`,
+      uniforms: { topColor:{value:topColor}, bottomColor:{value:bottomColor} },
       side: THREE.BackSide
     });
-    
     const envMesh = new THREE.Mesh(envGeo, envMat);
     envScene.add(envMesh);
-    
-    // Add some lights to env
-    const envLight1 = new THREE.PointLight(0xffffff, 2, 50);
-    envLight1.position.set(10, 20, 10);
-    envScene.add(envLight1);
-    
-    const envLight2 = new THREE.PointLight(0xff4655, 1, 30);
-    envLight2.position.set(-15, 10, -10);
-    envScene.add(envLight2);
-    
+    const envLight1 = new THREE.PointLight(0xffffff, 2.2, 50); envLight1.position.set(12,22,12); envScene.add(envLight1);
+    const envLight2 = new THREE.PointLight(0xff4655, 1.1, 32); envLight2.position.set(-16,11,-11); envScene.add(envLight2);
     const renderTarget = pmremGenerator.fromScene(envScene);
     this.scene.environment = renderTarget.texture;
-    
     pmremGenerator.dispose();
   }
 
   setQuality(quality) {
     this.quality = quality;
-    
-    switch(quality) {
+    switch(quality){
       case 'low':
         this.renderer.shadowMap.enabled = false;
         this.bloomPass.enabled = false;
         this.ssaoPass.enabled = false;
         this.renderer.setPixelRatio(1);
+        this.scene.fog = new THREE.FogExp2(0x06090f, 0.018);
         break;
       case 'high':
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.bloomPass.enabled = true;
-        this.bloomPass.strength = 0.25;
+        this.bloomPass.strength = 0.26;
         this.ssaoPass.enabled = true;
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
+        this.scene.fog = new THREE.FogExp2(0x06090f, 0.011);
         break;
       case 'ultra':
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.VSMShadowMap;
         this.bloomPass.enabled = true;
-        this.bloomPass.strength = 0.35;
+        this.bloomPass.strength = 0.36;
         this.ssaoPass.enabled = true;
-        this.ssaoPass.kernelRadius = 1.2;
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.ssaoPass.kernelRadius = 1.25;
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+        this.scene.fog = new THREE.FogExp2(0x06090f, 0.009);
         break;
     }
   }
 
-  resize(width, height) {
-    this.composer.setSize(width, height);
-    this.bloomPass.setSize(width, height);
-    this.ssaoPass.setSize(width, height);
+  resize(w,h){
+    this.composer.setSize(w,h);
+    this.bloomPass.setSize(w,h);
+    this.ssaoPass.setSize(w,h);
   }
 
-  render() {
-    this.composer.render();
-  }
+  render(){ this.composer.render(); }
 }
