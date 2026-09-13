@@ -16,6 +16,10 @@ export default defineConfig({
   preview: {
     host: '0.0.0.0',
     port: 5173,
-    cors: true
+    cors: true,
+    allowedHosts: true,
+    headers: {
+      'X-Frame-Options': 'ALLOWALL'
+    }
   }
 });

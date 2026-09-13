@@ -55,7 +55,13 @@ export class Enemy {
     });
     
     // Body - capsule approximation with boxes for better hitbox
-    const bodyGeo = new THREE.CapsuleGeometry(0.35, 1.0, 4, 8);
+    const createCapsule = (r, h) => {
+      if (THREE.CapsuleGeometry) return new THREE.CapsuleGeometry(r, h, 4, 8);
+      // Fallback: cylinder + spheres
+      const g = new THREE.CylinderGeometry(r, r, h, 8);
+      return g;
+    };
+    const bodyGeo = createCapsule(0.35, 1.0);
     this.bodyMesh = new THREE.Mesh(bodyGeo, vestMat);
     this.bodyMesh.position.y = 0.9;
     this.bodyMesh.castShadow = true;
@@ -102,7 +108,7 @@ export class Enemy {
     this.group.add(weapon);
     
     // Arms
-    const armGeo = new THREE.CapsuleGeometry(0.08, 0.5, 4, 8);
+    const armGeo = createCapsule(0.08, 0.5);
     const leftArm = new THREE.Mesh(armGeo, gearMat);
     leftArm.position.set(-0.4, 1.0, 0);
     leftArm.rotation.z = -0.3;
@@ -116,7 +122,7 @@ export class Enemy {
     this.group.add(rightArm);
     
     // Legs
-    const legGeo = new THREE.CapsuleGeometry(0.12, 0.7, 4, 8);
+    const legGeo = createCapsule(0.12, 0.7);
     const leftLeg = new THREE.Mesh(legGeo, gearMat);
     leftLeg.position.set(-0.15, 0.2, 0);
     this.group.add(leftLeg);
