@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Astra — AI Master Educator for JEE &amp; NEET</title>
+    <meta name="description" content="Astra: lecture mode with narrated slides plus a voice doubt-chat tutor for JEE Main, JEE Advanced and NEET. Strict LECTURE_MODE / VOICE_CHAT_MODE JSON contracts." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='26' fill='%237c6cff'/%3E%3Ctext x='50' y='70' font-size='58' font-family='Segoe UI,Arial' font-weight='700' text-anchor='middle' fill='%2307080f'%3EA%3C/text%3E%3C/svg%3E" />
+
+    <link rel="stylesheet" href="/vendor/katex/katex.min.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- ============ TOP BAR ============ -->
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">A</div>
+          <div>
+            <h1>Astra</h1>
+            <p>AI Master Educator · JEE Main · JEE Advanced · NEET</p>
+          </div>
+        </div>
+        <div class="topbar-spacer"></div>
+        <span class="pill" id="enginePill" title="Answer engine"><span class="dot"></span><span id="engineLabel">offline knowledge base</span></span>
+        <span class="pill" id="voicePill"><span class="dot"></span><span id="voiceLabel">voice: checking…</span></span>
+        <button class="btn small ghost" id="btnVoiceSettings" title="Voice &amp; speech settings">⚙ Voice setup</button>
+      </header>
+
+      <!-- ============ LEFT RAIL ============ -->
+      <aside class="rail">
+        <div class="card">
+          <h3>Sessions</h3>
+          <button class="nav-btn active" data-view="home"><span class="ico">📚</span> Chapter library</button>
+          <button class="nav-btn" data-view="chat"><span class="ico">🎙️</span> Voice doubt tutor</button>
+          <button class="nav-btn" data-view="api"><span class="ico">🧾</span> JSON contract</button>
+        </div>
+
+        <div class="card" id="filterCard">
+          <h3>Target exam</h3>
+          <div class="chips" id="examChips">
+            <button class="chip on" data-exam="All">All</button>
+            <button class="chip" data-exam="JEE Main">JEE Main</button>
+            <button class="chip" data-exam="JEE Advanced">JEE Advanced</button>
+            <button class="chip" data-exam="NEET">NEET</button>
+          </div>
+          <h3 style="margin-top:16px">Subject</h3>
+          <div class="chips" id="subjectChips">
+            <button class="chip on" data-subject="All">All</button>
+            <button class="chip" data-subject="Physics">Physics</button>
+            <button class="chip" data-subject="Chemistry">Chemistry</button>
+            <button class="chip" data-subject="Mathematics">Maths</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>This session</h3>
+          <div id="sessionStats" style="font-size:12.5px;color:var(--ink-dim);line-height:2">
+            <div>Slides covered: <b id="stSlides">0</b></div>
+            <div>Doubts cleared: <b id="stDoubts">0</b></div>
+            <div>Spoken aloud: <b id="stSpoken">0</b></div>
+          </div>
+          <button class="btn small ghost" id="btnReset" style="width:100%;margin-top:8px">Reset session</button>
+        </div>
+
+        <div class="rail-foot">
+          <p style="margin:0 0 6px">Both modes return strict JSON.</p>
+          <p style="margin:0">Engine rules: <code id="stRules">—</code> · decks: <code id="stDecks">—</code></p>
+        </div>
+      </aside>
+
+      <!-- ============ MAIN ============ -->
+      <main class="main">
+        <!-- ---------- HOME / LIBRARY ---------- -->
+        <section class="view active" id="view-home">
+          <div class="hero">
+            <div class="hero-copy">
+              <h2>Lecture mode, or just speak your doubt.</h2>
+              <p>
+                Astra runs two modes. <b>Lecture mode</b> builds a narrated slide deck for a chapter — bullets,
+                exact LaTeX, a key takeaway and a TTS-ready voice script per slide. <b>Voice chat mode</b> is the
+                1-on-1 doubt session: short spoken answers, the equation on screen while Astra talks, an exam-trap
+                warning, and a follow-up question to check you actually got it.
+              </p>
+              <div class="hero-actions">
+                <button class="btn primary" id="btnStartChat">🎙️ Start a doubt session</button>
+                <button class="btn" id="btnScrollDecks">📚 Browse chapters</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-strip">
+            <div class="stat"><b id="kpiDecks">—</b><span>Lecture decks</span></div>
+            <div class="stat"><b id="kpiSlides">—</b><span>Narrated slides</span></div>
+            <div class="stat"><b id="kpiRules">—</b><span>Doubt rules</span></div>
+            <div class="stat"><b id="kpiMinutes">—</b><span>Minutes of audio</span></div>
+          </div>
+
+          <div class="section-head">
+            <h2>Chapter library</h2>
+            <p>Every deck is served as <code style="font-family:var(--mono);color:var(--brand-2)">/api/lecture?id=…</code> in LECTURE_MODE JSON.</p>
+          </div>
+          <div class="deck-grid" id="deckGrid"></div>
+        </section>
+
+        <!-- ---------- LECTURE PLAYER ---------- -->
+        <section class="view" id="view-lecture">
+          <div class="player-head">
+            <button class="btn small ghost" id="btnBackHome">← Library</button>
+            <div class="titles">
+              <h2 id="lecTopic">—</h2>
+              <p class="sub" id="lecSub">—</p>
+            </div>
+            <div class="chips">
+              <button class="chip" id="btnAutoPlay">▶ Auto-narrate deck</button>
+              <button class="chip" id="btnStopSpeak">■ Stop</button>
+            </div>
+          </div>
+
+          <div class="progress-track"><div class="progress-fill" id="lecProgress"></div></div>
+
+          <article class="slide" id="slideBody"></article>
+
+          <div class="player-controls">
+            <button class="btn" id="btnPrev">← Previous</button>
+            <button class="btn primary" id="btnNarrate">🔊 Narrate this slide</button>
+            <button class="btn" id="btnNext">Next →</button>
+            <span class="grow"></span>
+            <span class="counter" id="lecCounter">1 / 1</span>
+            <button class="btn small ghost" id="btnAskDoubt">🎙️ Ask a doubt on this slide</button>
+            <button class="btn small ghost" id="btnRawSlide">{ } Raw slide JSON</button>
+          </div>
+        </section>
+
+        <!-- ---------- VOICE CHAT ---------- -->
+        <section class="view" id="view-chat">
+          <div class="player-head">
+            <div class="titles">
+              <h2>Voice doubt tutor</h2>
+              <p class="sub">
+                Press the mic and speak, or type. Astra answers in VOICE_CHAT_MODE JSON — short spoken reply,
+                LaTeX on screen, exam trap, follow-up question.
+              </p>
+            </div>
+            <div class="chips">
+              <button class="chip on" id="btnAutoSpeak">🔊 Auto-speak replies</button>
+              <button class="chip" id="btnClearChat">Clear</button>
+            </div>
+          </div>
+
+          <div class="chat" id="chatLog"></div>
+
+          <div class="composer">
+            <div class="composer-row">
+              <button class="btn" id="btnMic" title="Hold to speak (Web Speech API)">🎙️ Speak</button>
+              <input id="doubtInput" type="text" autocomplete="off" placeholder="Type or speak your doubt… e.g. why is work done by centripetal force zero" />
+              <button class="btn primary" id="btnSend">Ask Astra</button>
+            </div>
+            <div class="mic-status" id="micStatus"></div>
+            <div class="quick" id="quickChips"></div>
+          </div>
+        </section>
+
+        <!-- ---------- API CONTRACT ---------- -->
+        <section class="view" id="view-api">
+          <div class="section-head">
+            <h2>The JSON contract</h2>
+            <p>Exactly two response shapes, exactly as specified. Wire your own frontend to these endpoints.</p>
+          </div>
+          <div class="card" style="margin-bottom:14px">
+            <h3>Endpoints</h3>
+            <pre class="json" style="max-height:none">GET  /api/health                     -&gt; engine, rule count, deck count
+GET  /api/catalog                    -&gt; all decks with slide counts
+GET  /api/lecture?id=&lt;deck-id&gt;       -&gt; MODE 1: LECTURE_MODE JSON
+POST /api/doubt  {"message": "...", "history": [...], "contextTopic": "..."}
+                                     -&gt; MODE 2: VOICE_CHAT_MODE JSON
+GET  /api/schema                     -&gt; both contracts + a live example</pre>
+            <p class="note" style="margin:10px 0 0">
+              Live-model mode: set <code style="font-family:var(--mono)">OPENAI_API_KEY</code> (optionally
+              <code style="font-family:var(--mono)">OPENAI_BASE_URL</code> and <code style="font-family:var(--mono)">ASTRA_MODEL</code>)
+              before <code style="font-family:var(--mono)">npm start</code> and <code style="font-family:var(--mono)">/api/doubt</code>
+              is answered by the model using the same contract, with automatic fallback to the offline engine.
+            </p>
+          </div>
+          <div class="card">
+            <h3>MODE 1 · LECTURE_MODE</h3>
+            <pre class="json" id="schemaLecture">loading…</pre>
+          </div>
+          <div class="card" style="margin-top:14px">
+            <h3>MODE 2 · VOICE_CHAT_MODE</h3>
+            <pre class="json" id="schemaVoice">loading…</pre>
+          </div>
+        </section>
+      </main>
+
+      <!-- ============ JSON INSPECTOR ============ -->
+      <aside class="json-rail">
+        <div class="card" style="display:flex;flex-direction:column;min-height:0">
+          <div class="json-head">
+            <h3>Astra payload</h3>
+            <button class="btn small ghost" id="btnCopyJson">Copy</button>
+            <button class="btn small ghost" id="btnDownloadJson">⬇</button>
+          </div>
+          <div class="json-tabs" id="jsonTabs">
+            <button class="chip on" data-json="latest">Latest</button>
+            <button class="chip" data-json="lecture">Lecture</button>
+            <button class="chip" data-json="slide">Slide</button>
+            <button class="chip" data-json="voice">Voice</button>
+          </div>
+          <pre class="json" id="jsonOut"><span class="s">Open a deck or ask a doubt — the exact JSON Astra returns appears here.</span></pre>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ============ VOICE SETTINGS MODAL ============ -->
+    <div class="modal-backdrop" id="voiceModal">
+      <div class="modal">
+        <h2>Voice &amp; speech setup</h2>
+        <p>Narration uses your browser's speech synthesis; the mic uses the Web Speech API. Both run locally — no audio leaves your device.</p>
+
+        <div class="field">
+          <label for="voiceSelect">Astra's voice</label>
+          <select id="voiceSelect"></select>
+        </div>
+
+        <div class="field">
+          <label for="rateRange">Speaking rate</label>
+          <div class="range-row">
+            <input type="range" id="rateRange" min="0.7" max="1.4" step="0.05" value="1" />
+            <output id="rateOut">1.00×</output>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pitchRange">Pitch</label>
+          <div class="range-row">
+            <input type="range" id="pitchRange" min="0.6" max="1.4" step="0.05" value="1" />
+            <output id="pitchOut">1.00</output>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Behaviour</label>
+          <div class="switch-row">
+            <span>Auto-speak Astra's replies in doubt sessions</span>
+            <label class="switch"><input type="checkbox" id="optAutoSpeak" checked /><i></i></label>
+          </div>
+          <div class="switch-row">
+            <span>Auto-narrate slides in lecture mode</span>
+            <label class="switch"><input type="checkbox" id="optAutoNarrate" /><i></i></label>
+          </div>
+          <div class="switch-row">
+            <span>Start listening again after Astra finishes speaking</span>
+            <label class="switch"><input type="checkbox" id="optHandsFree" /><i></i></label>
+          </div>
+          <div class="switch-row">
+            <span>Recite doubt questions in Hindi/Hinglish too</span>
+            <label class="switch"><input type="checkbox" id="optLangHint" /><i></i></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="apiKey">Optional — live model key (stored in this browser tab only)</label>
+          <input type="password" id="apiKey" placeholder="sk-…  (leave blank to use the offline engine)" />
+        </div>
+
+        <div class="field">
+          <button class="btn small" id="btnTestVoice">🔊 Test this voice</button>
+        </div>
+
+        <div class="modal-foot">
+          <button class="btn ghost" id="btnCloseModal">Close</button>
+          <button class="btn primary" id="btnSaveVoice">Save settings</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="/vendor/katex/katex.min.js"></script>
+    <script src="/vendor/katex/contrib/mhchem.min.js"></script>
+    <script src="/vendor/katex/contrib/auto-render.min.js"></script>
+    <script src="/js/speech.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+{
+  "id": "phy-kinematics-1d-2d",
+  "mode": "LECTURE",
+  "subject": "Physics",
+  "topic": "Kinematics — Motion in 1D & 2D",
+  "targetExam": "JEE Main",
+  "tagline": "Equations of motion, graphs, relative velocity and projectile — the chapter that funds easy marks.",
+  "tags": ["mechanics", "graphs", "projectile", "formula-heavy"],
+  "prerequisites": ["Basic differentiation & integration", "Vector resolution"],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "Why kinematics is your cheapest marks",
+      "content": {
+        "bullets": [
+          "Kinematics describes motion without asking why — no forces, no mass, only geometry of motion.",
+          "Every question needs three things: a sign convention, the right equation, and the correct graph interpretation.",
+          "JEE Main averages 1–2 questions a year, NEET 1–2; almost all are direct formula or graph based.",
+          "The chapter is the foundation for laws of motion, work–energy and SHM, so it never really goes away."
+        ],
+        "latexFormulas": [
+          "\\text{Kinematics} = \\text{geometry of motion}:\\quad \\vec r(t),\\ \\vec v(t),\\ \\vec a(t)"
+        ],
+        "keyTakeaway": "Master the sign convention once and 70% of kinematics errors disappear."
+      },
+      "voiceScript": "Let us start with why this chapter matters. Kinematics is the geometry of motion. We describe where a body is, how fast it moves and how that speed changes, without ever asking which force caused it. That makes it the cheapest scoring chapter in mechanics, because most questions are direct formula or graph based. There is one habit that fixes most of your mistakes: choose your sign convention at the top of the page and never break it. Hold that thought, we will use it on every slide."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Displacement, velocity, acceleration — the calculus ladder",
+      "content": {
+        "bullets": [
+          "Distance is a scalar path length; displacement is the straight-line change in position vector.",
+          "Velocity is the time rate of displacement; speed is the magnitude of velocity — they differ whenever direction changes.",
+          "Acceleration is the time rate of velocity; it can be non-zero even at constant speed (circular motion).",
+          "Average quantities use total change over total time; instantaneous quantities are the derivative at an instant."
+        ],
+        "latexFormulas": [
+          "\\vec v_{avg}=\\frac{\\Delta \\vec r}{\\Delta t},\\qquad \\vec v=\\frac{d\\vec r}{dt}",
+          "\\vec a_{avg}=\\frac{\\Delta \\vec v}{\\Delta t},\\qquad \\vec a=\\frac{d\\vec v}{dt}=\\frac{dv}{dx}\\cdot v",
+          "\\text{Speed}=|\\vec v|,\\qquad \\text{Distance}=\\int |\\vec v|\\,dt"
+        ],
+        "keyTakeaway": "Differentiation climbs down the ladder r to v to a; integration climbs back up."
+      },
+      "voiceScript": "Now the definitions, and please do not memorise them as formulas, memorise them as a ladder. Position differentiates to velocity, velocity differentiates to acceleration. So integration walks back up the ladder. Average velocity is total displacement over total time, while instantaneous velocity is the derivative at that instant. Here is the exam trap: average speed uses total distance, average velocity uses displacement. In a round trip the displacement is zero, so average velocity is zero but average speed is definitely not. Also remember acceleration can be non-zero even when speed is constant, and uniform circular motion is exactly that case."
+    },
+    {
+      "slideNumber": 3,
+      "title": "The three equations of motion — and when you may use them",
+      "content": {
+        "bullets": [
+          "Valid only for constant (uniform) acceleration in a straight line — check this before writing anything.",
+          "Each equation omits one variable: pick the one that skips the quantity you neither know nor need.",
+          "For variable acceleration, fall back to the definitions: a = dv/dt or a = v dv/dx, then integrate.",
+          "Free fall is just these equations with a = ±g and your chosen sign convention applied."
+        ],
+        "latexFormulas": [
+          "v=u+at",
+          "s=ut+\\tfrac{1}{2}at^{2}",
+          "v^{2}=u^{2}+2as",
+          "s=\\frac{u+v}{2}\\,t,\\qquad s_n=u+\\frac{a}{2}(2n-1)"
+        ],
+        "keyTakeaway": "No time in the question? Use v² = u² + 2as. No displacement? Use s = (u+v)t/2."
+      },
+      "voiceScript": "Here are the three equations of motion, and the first thing I want you to say out loud is the condition: they hold only when acceleration is constant and the motion is along a straight line. If acceleration varies, these are simply wrong, and you must go back to a equals d v by d t, or the very useful form a equals v times d v by d x, and integrate. Choosing the right equation is a game of elimination. Each equation leaves out one variable. No time given and no time asked, use v squared equals u squared plus two a s. No displacement, use s equals u plus v by two, times t. And one bonus formula for the nth second: displacement in the nth second equals u plus a by two times two n minus one."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Graphs — slope, area, and the traps examiners plant",
+      "content": {
+        "bullets": [
+          "x–t graph: slope = velocity; a curved x–t graph means non-uniform velocity.",
+          "v–t graph: slope = acceleration, area under curve = displacement (signed), total |area| = distance.",
+          "a–t graph: area = change in velocity; a constant-a graph is a horizontal line.",
+          "A straight line on an x–t graph means constant velocity, hence zero acceleration — not zero velocity."
+        ],
+        "latexFormulas": [
+          "v=\\frac{dx}{dt}\\ (\\text{slope of }x\\text{–}t),\\qquad a=\\frac{dv}{dt}\\ (\\text{slope of }v\\text{–}t)",
+          "\\Delta x=\\int_{t_1}^{t_2} v\\,dt\\ (\\text{area of }v\\text{–}t),\\qquad \\Delta v=\\int a\\,dt",
+          "\\text{Distance}=\\int |v|\\,dt"
+        ],
+        "keyTakeaway": "Read the axes first — half of all graph errors come from assuming it is a v–t graph."
+      },
+      "voiceScript": "Graphs are where JEE Main gets free marks from careless students. The rule is slope and area, and the meaning depends entirely on the axes. On a position time graph, the slope is velocity. On a velocity time graph, the slope is acceleration, and the area under the curve is displacement. Careful with the word displacement: area below the time axis is negative, so if the question asks for distance travelled you must add the absolute values of the areas. On an acceleration time graph, area gives the change in velocity. And a classic trap: a straight slanted line on a position time graph means constant velocity, so acceleration is zero, but velocity is definitely not zero."
+    },
+    {
+      "slideNumber": 5,
+      "title": "Relative velocity — trains, rivers and rain",
+      "content": {
+        "bullets": [
+          "Velocity of A with respect to B is the vector difference, taken in that exact order.",
+          "River–boat: the boat's velocity is relative to the water; the resultant relative to ground is the vector sum.",
+          "Minimum crossing time = width / boat speed, achieved by heading straight across (drift is irrelevant to time).",
+          "Shortest path requires aiming upstream so the resultant is perpendicular to the bank — needs boat speed > river speed."
+        ],
+        "latexFormulas": [
+          "\\vec v_{AB}=\\vec v_A-\\vec v_B,\\qquad \\vec v_{AG}=\\vec v_{AW}+\\vec v_{WG}",
+          "t_{\\min}=\\frac{d}{v_{BW}},\\qquad \\text{drift}=v_R\\cdot t",
+          "\\text{Shortest path: }\\sin\\theta=\\frac{v_R}{v_{BW}},\\quad v_{\\text{net}}=\\sqrt{v_{BW}^2-v_R^2}"
+        ],
+        "keyTakeaway": "Time depends only on the component of boat velocity across the river — drift never slows the crossing."
+      },
+      "voiceScript": "Relative velocity is subtraction with a strict order. Velocity of A with respect to B equals velocity of A minus velocity of B. Get the order wrong and the sign flips. The three standard settings are trains crossing each other, rain and an umbrella, and the river boat problem. For the river, here is the insight that separates toppers: the time to cross depends only on the component of the boat's velocity pointing across the river. The downstream drift is perpendicular to that, so it never affects the crossing time. Minimum time comes from heading straight across. For the shortest path you aim upstream at an angle whose sine is river speed divided by boat speed, and that is only possible if the boat is faster than the river."
+    },
+    {
+      "slideNumber": 6,
+      "title": "Projectile motion — two independent one-dimensional motions",
+      "content": {
+        "bullets": [
+          "Split the motion: horizontal is uniform velocity (a = 0), vertical is free fall (a = −g). They share only time.",
+          "Time of flight and range depend on the vertical component; maximum height depends only on u sin θ.",
+          "At the highest point velocity is purely horizontal (u cos θ) but acceleration is still g downward.",
+          "The velocity vector is never perpendicular to the acceleration except... never; but velocity is perpendicular to initial velocity at a specific time worth remembering."
+        ],
+        "latexFormulas": [
+          "x=(u\\cos\\theta)t,\\qquad y=(u\\sin\\theta)t-\\tfrac12 gt^2",
+          "T=\\frac{2u\\sin\\theta}{g},\\qquad H=\\frac{u^2\\sin^2\\theta}{2g},\\qquad R=\\frac{u^2\\sin2\\theta}{g}",
+          "R_{\\max}=\\frac{u^2}{g}\\ \\text{at}\\ \\theta=45^\\circ,\\qquad \\tan\\phi=\\frac{v_y}{v_x},\\qquad y=x\\tan\\theta\\left(1-\\frac{x}{R}\\right)"
+        ],
+        "keyTakeaway": "Complementary angles θ and 90°−θ give the same range; their times and heights differ."
+      },
+      "voiceScript": "Projectile motion looks scary but it is only two one dimensional problems glued together by time. Horizontally there is no acceleration, so x equals u cosine theta times t. Vertically it is free fall, so y equals u sine theta times t minus half g t squared. From these two you get the three headline results: time of flight is two u sine theta over g, maximum height is u squared sine squared theta over two g, and range is u squared sine two theta over g, which peaks at u squared over g when theta is forty five degrees. Two exam favourites. First, at the highest point the vertical velocity is zero but acceleration is still g downward, never zero. Second, complementary angles like thirty and sixty degrees give identical ranges. And for the trajectory, remember the parabola in the form y equals x tan theta times one minus x over R."
+    },
+    {
+      "slideNumber": 7,
+      "title": "Problem-solving order + the six traps that cost marks",
+      "content": {
+        "bullets": [
+          "Step 1: draw the situation and fix the sign convention. Step 2: list given and required. Step 3: pick the equation that skips the unknown you do not need.",
+          "Trap 1 — writing a = 0 at the top of a projectile's path.",
+          "Trap 2 — using equations of motion for variable acceleration.",
+          "Trap 3 — mixing up distance with displacement in area-under-graph questions.",
+          "Trap 4 — forgetting that average speed uses total distance.",
+          "Trap 5 — assuming drift increases crossing time in river problems.",
+          "Trap 6 — applying the shortest-path condition when the river is faster than the boat."
+        ],
+        "latexFormulas": [
+          "\\text{Checklist:}\\quad \\text{convention}\\to\\text{given}\\to\\text{equation}\\to\\text{units}\\to\\text{sanity of sign}"
+        ],
+        "keyTakeaway": "Solve symbolically first, substitute numbers last — units and signs then check themselves."
+      },
+      "voiceScript": "Let us close with method, because method is what converts knowledge into marks. Always in this order: draw and fix your sign convention, list what is given and what is asked, pick the equation that skips the variable you do not have, solve symbolically, and only then substitute numbers. Substituting early is how units and signs escape your attention. Then the traps. Acceleration at the top of a projectile path is g, not zero. The three equations need constant acceleration. Area under a velocity time graph is displacement, and distance needs absolute areas. Average speed uses total distance. River drift does not change crossing time. And the shortest path formula is meaningless if the river flows faster than the boat can row. Practise twenty questions with this order and your accuracy in mechanics will jump immediately."
+    }
+  ]
+}

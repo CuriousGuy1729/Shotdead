@@ -1,0 +1,150 @@
+{
+  "id": "chem-thermodynamics",
+  "mode": "LECTURE",
+  "subject": "Chemistry",
+  "topic": "Thermodynamics & Thermochemistry",
+  "targetExam": "JEE Main",
+  "tagline": "ΔH, ΔS, ΔG and Hess's law — one sign convention, four formulas, and a table that answers most questions.",
+  "tags": ["physical chemistry", "sign convention", "spontaneity", "numerical"],
+  "prerequisites": ["Mole concept", "States of matter & ideal gas"],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "System, surroundings and the sign convention that decides everything",
+      "content": {
+        "bullets": [
+          "Thermodynamics is about energy bookkeeping: what crosses the boundary as heat (q) or work (w), and what stays stored as internal energy (U).",
+          "CHEMISTRY convention (IUPAC): heat absorbed by the system is +q, work done ON the system is +w.",
+          "So ΔU = q + w in chemistry — note the plus sign. Physics writes ΔQ = ΔU + ΔW with work done BY the gas as positive.",
+          "State functions (U, H, S, G) depend only on the initial and final states; q and w are path functions.",
+          "System types: open (mass + energy exchange), closed (energy only), isolated (neither)."
+        ],
+        "latexFormulas": [
+          "\\Delta U=q+w\\quad(\\text{chemistry sign convention})",
+          "w=-P_{ext}\\Delta V\\ \\Rightarrow\\ \\text{expansion gives }w<0",
+          "\\Delta H=\\Delta U+\\Delta n_g RT"
+        ],
+        "keyTakeaway": "Read the subject before you write the first law — chemistry and physics use opposite signs for work."
+      },
+      "voiceScript": "Before any formula, we must fix the sign convention, because it decides every numerical in this chapter. In chemistry we follow the IUPAC convention: heat absorbed by the system is positive, and work done on the system is positive. So the first law is written delta U equals q plus w, with a plus sign. When a gas expands, it does work on the surroundings, which means work is done by the system, so w is negative. This is exactly opposite to the physics convention, where work done by the gas is taken as positive and the law reads delta Q equals delta U plus delta W. If you are writing both papers, check which convention the question expects. Then vocabulary: internal energy, enthalpy, entropy and Gibbs energy are state functions, they depend only on the endpoints. Heat and work are path functions, they depend on how you got there. And enthalpy relates to internal energy through delta H equals delta U plus delta n g R T, where delta n g counts gaseous moles only."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Enthalpy — five routes to ΔH",
+      "content": {
+        "bullets": [
+          "From bond energies: ΔH = Σ(bond energies of reactants) − Σ(bond energies of products). Breaking costs, forming releases.",
+          "From standard enthalpies of formation: ΔH° = ΣνΔHf°(products) − ΣνΔHf°(reactants).",
+          "ΔHf° of any element in its standard state is zero by definition — O₂, N₂, graphite, but NOT diamond or ozone.",
+          "From combustion data, and from enthalpy of atomisation, solution, hydration, sublimation and phase change.",
+          "ΔH is negative for exothermic (bond making dominates) and positive for endothermic reactions."
+        ],
+        "latexFormulas": [
+          "\\Delta H=\\sum BE_{\\text{reactants}}-\\sum BE_{\\text{products}}",
+          "\\Delta H^\\circ=\\sum \\nu_p\\Delta H_f^\\circ(\\text{products})-\\sum \\nu_r\\Delta H_f^\\circ(\\text{reactants})",
+          "\\Delta H_{sublimation}=\\Delta H_{fusion}+\\Delta H_{vaporisation}"
+        ],
+        "keyTakeaway": "Bond energies are subtracted in the opposite order to formation enthalpies — mixing these two up is the top error."
+      },
+      "voiceScript": "Enthalpy change can be reached by five routes, and the question tells you which one to use. If you are given bond energies, remember that breaking a bond absorbs energy and forming one releases it, so delta H equals the sum of the bond energies of the reactants minus the sum for the products. That order surprises everyone, so say it out loud: reactants minus products. If you are given standard enthalpies of formation, the order flips: delta H equals the sum for products minus the sum for reactants, each multiplied by its stoichiometric coefficient. And the formation enthalpy of any element in its standard state is zero by definition, which includes oxygen gas, nitrogen gas and graphite, but not diamond, not ozone, and not liquid bromine's alternatives. The remaining routes are combustion data, atomisation, and the phase change chain, where enthalpy of sublimation equals enthalpy of fusion plus enthalpy of vaporisation. Negative delta H means exothermic, positive means endothermic."
+    },
+    {
+      "slideNumber": 3,
+      "title": "Hess's law — because H is a state function",
+      "content": {
+        "bullets": [
+          "Hess's law: ΔH of a reaction is the same whether it occurs in one step or several, because enthalpy depends only on the endpoints.",
+          "Practical use: manipulate the given thermochemical equations — reverse one (flip the sign of ΔH), multiply one (multiply ΔH), then add.",
+          "Works for enthalpies of formation, combustion, and for reactions that cannot be measured directly (C → CO).",
+          "Hess's law fails for path functions, so never apply it to q or w individually."
+        ],
+        "latexFormulas": [
+          "\\Delta H_{reaction}=\\sum \\Delta H_{steps}",
+          "\\text{reverse a step}\\Rightarrow\\Delta H\\to-\\Delta H;\\quad \\text{multiply a step by }n\\Rightarrow\\Delta H\\to n\\Delta H",
+          "C+O_2\\to CO_2\\ (\\Delta H_1);\\ CO+\\tfrac12O_2\\to CO_2\\ (\\Delta H_2)\\Rightarrow C+\\tfrac12O_2\\to CO\\ (\\Delta H_1-\\Delta H_2)"
+        ],
+        "keyTakeaway": "Treat thermochemical equations like algebra — you may reverse, scale and add them."
+      },
+      "voiceScript": "Hess's law is the algebra of thermochemistry, and it is legitimate for one reason only: enthalpy is a state function. Since enthalpy depends only on the initial and final states, the total change is the same whether the reaction happens in one step or in ten. Practically, you are given two or three thermochemical equations with their enthalpy changes, and you must combine them to get the target equation. You are allowed exactly three operations. Reverse an equation and the sign of its delta H flips. Multiply an equation by a number and multiply its delta H by the same number. Then add the equations together and add the enthalpy changes. The classic application is the formation of carbon monoxide from carbon, which cannot be measured directly because some carbon dioxide always forms, so you subtract the combustion of carbon monoxide from the combustion of carbon. One caution: Hess's law applies to state functions only. Never apply it to heat or work separately, because those depend on the path."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Entropy and the second law",
+      "content": {
+        "bullets": [
+          "Entropy S measures the degree of disorder or randomness; it is a state function with units J K⁻¹ mol⁻¹.",
+          "ΔS > 0 for melting, vaporisation, dissolution of most solids, and any reaction that increases the number of gaseous moles.",
+          "Second law: for any spontaneous process, ΔS_universe = ΔS_system + ΔS_surroundings > 0.",
+          "ΔS_surroundings = −ΔH_system / T, which is how an endothermic reaction can still be spontaneous.",
+          "Third law: the entropy of a perfect crystal at 0 K is zero, which is why absolute entropies exist."
+        ],
+        "latexFormulas": [
+          "\\Delta S=\\frac{q_{rev}}{T},\\qquad \\Delta S_{surr}=-\\frac{\\Delta H_{sys}}{T}",
+          "\\Delta S^\\circ=\\sum S^\\circ_{products}-\\sum S^\\circ_{reactants}",
+          "\\Delta n_g>0\\Rightarrow\\Delta S>0\\ (\\text{usually})"
+        ],
+        "keyTakeaway": "Absolute entropies exist (third law); absolute enthalpies do not — only differences."
+      },
+      "voiceScript": "Entropy is the measure of disorder or randomness, and like enthalpy it is a state function. Predicting its sign is usually easy: melting, vaporisation and dissolving increase entropy, and any reaction that increases the number of gaseous moles increases entropy, because gases are far more disordered than liquids or solids. The second law states that for a spontaneous process the total entropy of the universe must increase. That total has two parts: the entropy change of the system, plus the entropy change of the surroundings. And the surroundings part equals minus delta H of the system divided by temperature. That single relation explains how an endothermic reaction, which absorbs heat and might look unfavourable, can still be spontaneous, because it can pay for itself with a large increase in the system's own disorder. Finally the third law: the entropy of a perfect crystal at absolute zero is exactly zero, which is why we can tabulate absolute entropies. We cannot do that for enthalpy, where only differences have meaning."
+    },
+    {
+      "slideNumber": 5,
+      "title": "Gibbs energy and the spontaneity table",
+      "content": {
+        "bullets": [
+          "Gibbs energy packages the second law for constant temperature and pressure, the conditions of a real laboratory.",
+          "ΔG < 0 spontaneous, ΔG = 0 equilibrium, ΔG > 0 non-spontaneous (the reverse is spontaneous).",
+          "At equilibrium ΔG = 0, giving ΔG° = −RT ln K — the bridge between thermodynamics and the equilibrium constant.",
+          "ΔG° is the standard free energy change and decides the size of K; ΔG (without the degree symbol) decides the direction at the current composition.",
+          "Note: ΔG < 0 says nothing about how FAST the reaction is — kinetics is separate."
+        ],
+        "latexFormulas": [
+          "\\Delta G=\\Delta H-T\\Delta S",
+          "\\Delta G^\\circ=-RT\\ln K=\\Delta H^\\circ-T\\Delta S^\\circ",
+          "\\Delta G=\\Delta G^\\circ+RT\\ln Q"
+        ],
+        "keyTakeaway": "ΔG tells you whether a reaction will happen, never how quickly."
+      },
+      "voiceScript": "Gibbs free energy is the practical form of the second law, valid at constant temperature and pressure, which is how chemistry is actually done. The equation is delta G equals delta H minus T delta S, and the decision rule is clean: negative delta G means spontaneous, zero means the system is at equilibrium, and positive means non spontaneous, with the reverse reaction being spontaneous instead. At equilibrium, delta G is zero, and that immediately gives the beautiful connection delta G standard equals minus R T times the natural log of K. So thermodynamics and the equilibrium constant are the same statement in two languages. Be careful to distinguish delta G standard, which is a fixed number that decides how large K is, from delta G without the degree symbol, which depends on the current composition and decides which way the reaction runs right now. They are linked by delta G equals delta G standard plus R T log Q. And one warning that catches students out: a negative delta G says nothing about speed. Diamond converting to graphite is spontaneous and takes millions of years. Thermodynamics decides whether, kinetics decides how fast."
+    },
+    {
+      "slideNumber": 6,
+      "title": "The four-case table — memorise this, not the algebra",
+      "content": {
+        "bullets": [
+          "Case 1: ΔH < 0, ΔS > 0 → ΔG < 0 at ALL temperatures. Always spontaneous (combustion of many fuels).",
+          "Case 2: ΔH > 0, ΔS < 0 → ΔG > 0 at ALL temperatures. Never spontaneous; the reverse always is.",
+          "Case 3: ΔH < 0, ΔS < 0 → spontaneous only at LOW temperature (exothermy wins before the entropy penalty).",
+          "Case 4: ΔH > 0, ΔS > 0 → spontaneous only at HIGH temperature (melting, vaporisation).",
+          "The crossover temperature for cases 3 and 4 is T = ΔH/ΔS, where ΔG = 0."
+        ],
+        "latexFormulas": [
+          "T_{crossover}=\\frac{\\Delta H}{\\Delta S}\\quad(\\text{both with their signs, giving }T>0)",
+          "\\begin{array}{c|c|c}\\Delta H & \\Delta S & \\text{Spontaneous when}\\\\\\hline - & + & \\text{always}\\\\ + & - & \\text{never}\\\\ - & - & T<\\Delta H/\\Delta S\\\\ + & + & T>\\Delta H/\\Delta S\\end{array}"
+        ],
+        "keyTakeaway": "Cases 1 and 2 are temperature-independent; cases 3 and 4 flip at T = ΔH/ΔS."
+      },
+      "voiceScript": "This is the highest yield table in physical chemistry, so let us build it rather than memorise it blindly. Look at the two signs in delta G equals delta H minus T delta S. If delta H is negative and delta S is positive, both terms help, so delta G is negative at every temperature and the reaction is always spontaneous. If delta H is positive and delta S is negative, both terms hurt, so it is never spontaneous at any temperature, though the reverse reaction always is. Now the two interesting cases. If delta H is negative but delta S is also negative, the exothermic term helps while the entropy term hurts, and the entropy term grows with temperature. So it is spontaneous only at low temperatures. If delta H is positive and delta S is positive, it is spontaneous only at high temperatures, and that is exactly the story of melting and vaporisation. For these two cases, the flip happens where delta G is zero, that is at T equals delta H over delta S. Learn the table with the reasoning attached and spontaneity questions become five seconds each."
+    },
+    {
+      "slideNumber": 7,
+      "title": "Worked method + traps",
+      "content": {
+        "bullets": [
+          "Method: identify what is given (bond energies / formation data / ΔH and ΔS / K) → pick the matching formula → convert units → apply signs → state the verdict.",
+          "Unit trap: ΔH is usually in kJ mol⁻¹ while ΔS is in J K⁻¹ mol⁻¹ — convert before subtracting, or your T will be off by a factor of 1000.",
+          "Sign trap: bond energies are reactants minus products; formation enthalpies are products minus reactants.",
+          "Definition trap: ΔHf° = 0 only for elements in their standard state (graphite, not diamond; O₂, not O₃).",
+          "Concept trap: ΔG < 0 does not mean fast. And ΔG° < 0 means K > 1, not that the reaction completes.",
+          "Gas work trap: at constant pressure w = −PΔV = −Δng RT; at constant volume w = 0 and ΔU = q_v; so ΔH = q_p."
+        ],
+        "latexFormulas": [
+          "\\Delta H=\\Delta U+\\Delta n_gRT,\\qquad q_p=\\Delta H,\\qquad q_v=\\Delta U",
+          "w=-P_{ext}\\Delta V=-\\Delta n_g RT\\ (\\text{isobaric, gases})"
+        ],
+        "keyTakeaway": "Convert ΔS to kJ before using it with ΔH in kJ — the single most expensive mistake in this chapter."
+      },
+      "voiceScript": "Let us finish with the working method and the traps. Method: identify what data you have been given, because that dictates the formula. Bond energies, formation enthalpies, delta H with delta S, or an equilibrium constant. Then convert units before you substitute, apply the signs exactly as the convention demands, and end by stating the verdict in words, spontaneous or not. Now the traps, and the first one is expensive. Enthalpy is quoted in kilojoules per mole while entropy is in joules per kelvin per mole. If you subtract them without converting, your crossover temperature is wrong by a factor of a thousand. Second, the order of subtraction differs between bond energies and formation enthalpies, and swapping them flips your answer. Third, standard formation enthalpy is zero only for elements in their standard state, graphite yes, diamond no. Fourth, a negative delta G never implies a fast reaction. And finally, at constant volume no work is done so q v equals delta U, while at constant pressure q p equals delta H, and the two differ by delta n g R T. Practise eight numericals with this checklist and thermodynamics stops being the chapter students skip."
+    }
+  ]
+}

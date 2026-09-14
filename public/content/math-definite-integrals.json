@@ -1,0 +1,153 @@
+{
+  "id": "math-definite-integrals",
+  "mode": "LECTURE",
+  "subject": "Mathematics",
+  "topic": "Definite Integrals & Their Properties",
+  "targetExam": "JEE Advanced",
+  "tagline": "The king property, symmetry and periodicity — where Advanced integral questions are actually decided.",
+  "tags": ["calculus", "integration", "properties", "Advanced-favourite"],
+  "prerequisites": ["Indefinite integration", "Even/odd functions"],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "Definite integral as a limit of a sum, and as a signed area",
+      "content": {
+        "bullets": [
+          "A definite integral is a number; an indefinite integral is a family of functions plus an arbitrary constant.",
+          "Definition: the limit of a Riemann sum, which converts certain series into integrals — a favourite Advanced trick.",
+          "Geometrically it is the signed area between the curve and the x-axis; below the axis counts negative.",
+          "Total area requires splitting at the zeros of the function and taking absolute values of each piece.",
+          "The value is independent of the variable's name: the integral of f(x) dx from a to b equals the integral of f(t) dt from a to b."
+        ],
+        "latexFormulas": [
+          "\\int_a^b f(x)\\,dx=\\lim_{n\\to\\infty}h\\sum_{r=0}^{n-1}f(a+rh),\\quad h=\\frac{b-a}{n}",
+          "\\frac1n\\sum_{r=1}^{n}f\\!\\left(\\frac rn\\right)\\xrightarrow{n\\to\\infty}\\int_0^1 f(x)\\,dx",
+          "\\text{Area}=\\int_a^b|f(x)|\\,dx"
+        ],
+        "keyTakeaway": "Definite integral = a number; the '+c' disappears the moment limits are applied."
+      },
+      "voiceScript": "Let us first settle what a definite integral is. It is a number, whereas an indefinite integral is a family of functions with an arbitrary constant attached, and the moment you apply limits, that constant disappears. The formal definition is the limit of a Riemann sum, and that definition is not just theory, it is a technique. Any sum of the form one over n times the sum of f of r over n, as n tends to infinity, becomes the integral of f from zero to one. Advanced papers use this to convert an ugly series into a clean integral. Geometrically, the definite integral is the signed area between the curve and the x axis, where the region below the axis contributes negatively. So if the question asks for area rather than the integral, you must split at the zeros and add absolute values. One small but useful fact: the value does not depend on the name of the variable, so you are free to rename x as t, which is exactly what the king property relies on."
+    },
+    {
+      "slideNumber": 2,
+      "title": "The four basic properties you use mechanically",
+      "content": {
+        "bullets": [
+          "Reversing the limits flips the sign.",
+          "Additivity over adjacent intervals: split at any interior point c — this is how you handle modulus functions.",
+          "Linearity: the integral of a sum is the sum of the integrals, and constants factor out.",
+          "For a continuous f, the integral function g(x) = ∫ₐˣ f(t)dt is differentiable and g′(x) = f(x) — the Leibniz rule base case."
+        ],
+        "latexFormulas": [
+          "\\int_a^b f=-\\int_b^a f,\\qquad \\int_a^b f=\\int_a^c f+\\int_c^b f",
+          "\\int_a^b[\\alpha f+\\beta g]\\,dx=\\alpha\\int_a^b f\\,dx+\\beta\\int_a^b g\\,dx",
+          "\\frac{d}{dx}\\int_{a}^{x}f(t)\\,dt=f(x),\\qquad \\frac{d}{dx}\\int_{u(x)}^{v(x)}f(t)\\,dt=f(v)v'-f(u)u'"
+        ],
+        "keyTakeaway": "Leibniz rule: differentiate the upper limit and subtract the differentiated lower limit — no integration needed."
+      },
+      "voiceScript": "Four properties you will use almost mechanically. Reversing the limits changes the sign of the integral. Splitting is additivity: you may break the integral at any interior point, and this is exactly how you handle modulus functions, because you split at the point where the expression inside changes sign. Linearity says constants come out and sums split up. And the fourth is the one that produces the most elegant questions: the Leibniz rule. If you define a function as the integral from a to x of f of t d t, then that function is differentiable and its derivative is simply f of x. The extended version, when both limits are functions of x, gives you f evaluated at the upper limit times the derivative of the upper limit, minus f evaluated at the lower limit times the derivative of the lower limit. Notice that you never actually perform the integration, which is why these questions look terrifying and are in fact two lines long."
+    },
+    {
+      "slideNumber": 3,
+      "title": "Property 4 — the king property",
+      "content": {
+        "bullets": [
+          "∫₀ᵃ f(x) dx = ∫₀ᵃ f(a − x) dx. Substituting x → a − x leaves the limits and the value untouched.",
+          "Its real power comes from ADDING the original and the transformed integral, so awkward terms cancel or combine.",
+          "Classic use: an x multiplying a symmetric function, because x + (a − x) = a removes x entirely.",
+          "Generalised form: ∫ₐᵇ f(x) dx = ∫ₐᵇ f(a + b − x) dx."
+        ],
+        "latexFormulas": [
+          "\\int_0^a f(x)\\,dx=\\int_0^a f(a-x)\\,dx",
+          "2I=\\int_0^a\\left[f(x)+f(a-x)\\right]dx",
+          "\\int_0^\\pi x f(\\sin x)\\,dx=\\frac{\\pi}{2}\\int_0^\\pi f(\\sin x)\\,dx",
+          "\\int_0^\\pi \\frac{x\\sin x}{1+\\cos^2x}\\,dx=\\frac{\\pi}{2}\\int_0^\\pi\\frac{\\sin x}{1+\\cos^2x}dx=\\frac{\\pi^2}{4}"
+        ],
+        "keyTakeaway": "Whenever x multiplies a function of sin x over 0 to π, the answer is π/2 times the integral without the x."
+      },
+      "voiceScript": "Now the property that earns the nickname king property. The integral of f of x from zero to a equals the integral of f of a minus x over the same limits. On its own that looks useless, because you have just rewritten the same thing. Its power appears when you add the original integral and the transformed one. In many questions the awkward part of the integrand cancels or combines beautifully. The signature case is an x multiplying a symmetric function, because x plus a minus x equals a, and the variable disappears completely. That gives the famous result: the integral from zero to pi of x times f of sine x equals pi over two times the integral of f of sine x alone. Let me run the classic. Integral from zero to pi of x sine x over one plus cosine squared x. Apply the property, add, the x drops out leaving pi, you get pi times the integral of sine x over one plus cosine squared x, halve it, then substitute cosine x equals t, and the answer is pi squared over four. Four lines once you know the move."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Even and odd functions — symmetry over a symmetric interval",
+      "content": {
+        "bullets": [
+          "Over [−a, a]: an odd function integrates to ZERO, an even function gives TWICE the integral from 0 to a.",
+          "Odd: f(−x) = −f(x) — sin x, tan x, x³, x·cos x, sin³x.",
+          "Even: f(−x) = f(x) — cos x, x², |x|, sec x, x·sin x, cos²x.",
+          "Test products carefully: odd × odd = even, even × even = even, odd × even = odd.",
+          "Symmetry only pays off when the interval itself is symmetric about the origin — check the limits before using it."
+        ],
+        "latexFormulas": [
+          "\\int_{-a}^{a}f(x)\\,dx=\\begin{cases}2\\int_0^a f(x)\\,dx,&f\\ \\text{even}\\\\[4pt]0,&f\\ \\text{odd}\\end{cases}",
+          "f(-x)=-f(x)\\Rightarrow\\text{odd};\\quad f(-x)=f(x)\\Rightarrow\\text{even}",
+          "\\int_{-\\pi/2}^{\\pi/2}\\sin^3x\\,dx=0,\\qquad \\int_{-1}^{1}x\\sin x\\,dx=2\\int_0^1 x\\sin x\\,dx"
+        ],
+        "keyTakeaway": "Identify odd parts first and delete them — often half the integrand vanishes for free."
+      },
+      "voiceScript": "Symmetry is the cheapest marks in integral calculus. Over an interval symmetric about the origin, minus a to a, an odd function integrates to exactly zero, and an even function gives twice the integral from zero to a. An odd function satisfies f of minus x equals minus f of x, like sine x, tan x, and x cubed. An even function satisfies f of minus x equals f of x, like cosine x, x squared, modulus x, and importantly x times sine x. That last one surprises students: x is odd, sine x is odd, and the product of two odd functions is even. So the product rule is: odd times odd is even, even times even is even, and odd times even is odd. The exam strategy is to split the integrand into an odd part and an even part, throw away the odd part immediately, and integrate only what remains. One caution: this only works when the limits are symmetric. If the interval is zero to a, symmetry about the origin is useless and you need the king property instead."
+    },
+    {
+      "slideNumber": 5,
+      "title": "More high-yield properties",
+      "content": {
+        "bullets": [
+          "∫ₐᵇ f(x) dx = ∫ₐᵇ f(a + b − x) dx — the generalised king property for any interval.",
+          "∫₀²ᵃ f(x) dx = 2∫₀ᵃ f(x) dx if f(2a − x) = f(x), and 0 if f(2a − x) = −f(x).",
+          "Periodic functions: ∫₀ⁿᵀ f = n∫₀ᵀ f, and the integral over any full period is the same regardless of the starting point.",
+          "Comparison/estimation: if m ≤ f(x) ≤ M on [a,b] then m(b−a) ≤ ∫ ≤ M(b−a) — used for bounding answers in Advanced.",
+          "∫₀^{π/2} f(sin x) dx = ∫₀^{π/2} f(cos x) dx, and the Wallis formula for powers of sin and cos."
+        ],
+        "latexFormulas": [
+          "\\int_a^b f(x)\\,dx=\\int_a^b f(a+b-x)\\,dx",
+          "\\int_0^{nT}f(x)\\,dx=n\\int_0^T f(x)\\,dx\\quad(f\\ \\text{periodic},\\ T)",
+          "\\int_0^{\\pi/2}\\sin^n x\\,dx=\\int_0^{\\pi/2}\\cos^n x\\,dx=\\begin{cases}\\frac{(n-1)!!}{n!!}\\cdot\\frac\\pi2,&n\\ \\text{even}\\\\[3pt]\\frac{(n-1)!!}{n!!},&n\\ \\text{odd}\\end{cases}"
+        ],
+        "keyTakeaway": "Wallis turns ∫₀^{π/2} sinⁿx into an arithmetic answer — no integration at all."
+      },
+      "voiceScript": "A few more properties that appear repeatedly. The generalised king property works on any interval, replacing x by a plus b minus x. For the interval zero to two a, if f of two a minus x equals f of x, the integral is twice the integral from zero to a; if it equals minus f of x, the integral is zero. Periodic functions have their own rule: the integral over n complete periods is n times the integral over one period, and the value over any full period is the same no matter where you start, which makes questions on sine squared or modulus sine very fast. For estimation, if a function is trapped between m and M on an interval, the integral is trapped between m times the length and M times the length, and Advanced questions sometimes ask only for a bound. Finally two gems for the interval zero to pi by two: the integral of f of sine x equals the integral of f of cosine x, and Wallis's formula converts powers of sine or cosine into a neat product of fractions, with a factor of pi by two when the power is even. Wallis is pure recall and it saves several minutes."
+    },
+    {
+      "slideNumber": 6,
+      "title": "Worked pattern — recognising which property a question wants",
+      "content": {
+        "bullets": [
+          "Limits 0 to a with an x multiplying something symmetric → king property.",
+          "Limits −a to a → check parity first, delete the odd part.",
+          "Limits 0 to π with f(sin x) → king property gives π/2 × integral without x.",
+          "Limits 0 to π/2 with sinⁿ or cosⁿ → Wallis.",
+          "Limits 0 to 2π or a periodic-looking integrand → periodicity, split into full periods.",
+          "Integrand with f(x) + f(−x) structure → write it as even + odd and use symmetry.",
+          "Both f(x) and f(a−x) present in the question itself → the examiner already did the substitution for you."
+        ],
+        "latexFormulas": [
+          "\\int_0^\\pi \\ln(\\sin x)\\,dx=2\\int_0^{\\pi/2}\\ln(\\sin x)\\,dx=-\\pi\\ln2",
+          "I=\\int_0^{\\pi/2}\\ln\\sin x\\,dx=\\int_0^{\\pi/2}\\ln\\cos x\\,dx\\Rightarrow 2I=\\int_0^{\\pi/2}\\ln\\frac{\\sin2x}{2}dx=-\\frac\\pi2\\ln2"
+        ],
+        "keyTakeaway": "Read the LIMITS before the integrand — the limits tell you which property to use."
+      },
+      "voiceScript": "Here is the pattern recognition that turns this chapter into reflexes. Look at the limits first, before you even read the integrand, because the limits tell you which property applies. Limits from zero to a with an x multiplying something symmetric means the king property. Limits from minus a to a means check parity and delete the odd part. Limits from zero to pi with a function of sine x means the king property gives you pi over two times the integral without the x. Limits from zero to pi by two with a power of sine or cosine means Wallis. Anything periodic-looking over zero to two pi means split into full periods. And if the question itself already shows you f of x and f of a minus x, the examiner has done the substitution for you and wants you to add them. Let me demonstrate with the classic: the integral from zero to pi by two of natural log sine x. Call it I. By symmetry the same I equals the integral of natural log cosine x. Add them, use two sine x cosine x equals sine two x, substitute, and you get two I equals minus pi by two times log two, so I equals minus pi by two log two. Over pi the answer doubles to minus pi log two."
+    },
+    {
+      "slideNumber": 7,
+      "title": "Traps, and how to practise this chapter",
+      "content": {
+        "bullets": [
+          "Trap 1: forgetting to change the LIMITS when substituting inside a definite integral.",
+          "Trap 2: writing '+ c' in a definite integral, or dropping the modulus when the question asks for AREA.",
+          "Trap 3: applying symmetry on a non-symmetric interval.",
+          "Trap 4: sign errors in the Leibniz rule — it is upper minus lower, not the reverse.",
+          "Trap 5: treating the integral of a piecewise or greatest-integer function as a single expression instead of splitting at the jumps.",
+          "Practice plan: 15 king-property problems, 10 symmetry problems, 10 Wallis, 5 Leibniz-rule, 5 area-between-curves. Always write which property you used, in the margin.",
+          "If a definite integral resists three properties, it is almost certainly a substitution you have not spotted — look for a function and its derivative."
+        ],
+        "latexFormulas": [
+          "\\int_a^b|f(x)|\\,dx\\ne\\left|\\int_a^b f(x)\\,dx\\right|\\ \\text{in general}",
+          "\\frac{d}{dx}\\int_{u}^{v}f(t)dt=f(v)\\frac{dv}{dx}-f(u)\\frac{du}{dx}"
+        ],
+        "keyTakeaway": "Change the limits with the substitution — the most expensive two marks in calculus."
+      },
+      "voiceScript": "Finally, the traps and a practice plan. Trap one, and it is the most expensive mistake in calculus: when you substitute inside a definite integral, you must change the limits too. If you forget, you will get an answer in terms of the new variable evaluated at the old limits, which is nonsense. Trap two: never write plus c in a definite integral, and remember that the integral of the modulus of a function is not the modulus of the integral. Trap three: symmetry only works on a symmetric interval. Trap four: the Leibniz rule is upper limit contribution minus lower limit contribution, in that order. Trap five: for piecewise functions and greatest integer functions, split at the jumps. For practice, do fifteen king property problems, ten symmetry problems, ten Wallis formula problems, five Leibniz rule problems and five area between curves problems, and write in the margin which property each one used. That annotation is what builds the reflex. And a final heuristic: if a definite integral resists three different properties, there is almost certainly a substitution you have not spotted, so look for a function and its own derivative sitting inside the integrand."
+    }
+  ]
+}

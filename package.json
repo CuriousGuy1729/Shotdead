@@ -1,0 +1,24 @@
+{
+  "name": "astra-tutor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Astra - AI Master Educator for JEE (Main & Advanced) and NEET. Lecture mode + voice doubt-chat mode, strict JSON output contracts.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test/validate-content.js && node test/smoke.js",
+    "test:content": "node test/validate-content.js",
+    "test:smoke": "node test/smoke.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "katex": "^0.16.20"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1"
+  }
+}

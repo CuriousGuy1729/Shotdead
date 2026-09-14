@@ -1,0 +1,156 @@
+{
+  "id": "math-quadratic-equations",
+  "mode": "LECTURE",
+  "subject": "Mathematics",
+  "topic": "Quadratic Equations — Roots, Discriminant & Location of Roots",
+  "targetExam": "JEE Main",
+  "tagline": "Vieta, the discriminant, common roots and the location-of-roots conditions — algebra's highest marks-per-minute chapter.",
+  "tags": ["algebra", "roots", "inequalities", "fast-scoring"],
+  "prerequisites": ["Factorisation", "Basic inequalities"],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "The quadratic and its two roots",
+      "content": {
+        "bullets": [
+          "A quadratic expression is ax² + bx + c with a ≠ 0 — if a = 0 it is linear and every formula below breaks.",
+          "The roots come from completing the square, which is the derivation worth doing once so you never misremember the formula.",
+          "Roots may be real and distinct, real and equal, or a complex conjugate pair.",
+          "If a, b, c are rational and the discriminant is a perfect square, the roots are rational and the expression factorises over the rationals."
+        ],
+        "latexFormulas": [
+          "ax^2+bx+c=0,\\ a\\ne0\\quad\\Rightarrow\\quad x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}",
+          "D=b^2-4ac",
+          "D>0:\\ \\text{real \\& distinct},\\quad D=0:\\ \\text{real \\& equal},\\quad D<0:\\ \\text{complex conjugate}"
+        ],
+        "keyTakeaway": "Everything about a quadratic is decided by D and by a — the sign of a sets the parabola's opening."
+      },
+      "voiceScript": "Let us start clean. A quadratic expression is a x squared plus b x plus c with a not equal to zero, and I stress that condition because if a is zero the equation is linear and every formula we are about to write becomes meaningless. The roots come from the quadratic formula, minus b plus or minus root of b squared minus four a c, all over two a. Do derive this once by completing the square, because the derivation is what stops you misremembering the sign of b or the two a in the denominator. The quantity under the root, b squared minus four a c, is called the discriminant, and it decides everything about the roots. Positive gives two real and distinct roots, zero gives real and equal roots, and negative gives a pair of complex conjugates. One refinement exams love: if the coefficients are rational and the discriminant is a perfect square, then the roots are rational and the expression factorises over the rationals."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Vieta's relations — sum and product, and what you can build from them",
+      "content": {
+        "bullets": [
+          "Sum of roots α + β = −b/a; product αβ = c/a. These work even when the roots are complex.",
+          "From sum and product you can build any symmetric function of the roots without ever solving the equation.",
+          "Difference: |α − β| = √D / |a|. Also α² + β² = (α+β)² − 2αβ, and 1/α + 1/β = (α+β)/αβ.",
+          "Reconstruct the equation from its roots: x² − (sum)x + (product) = 0.",
+          "For a cubic, Vieta extends to three relations — sum, sum of pairwise products, and product."
+        ],
+        "latexFormulas": [
+          "\\alpha+\\beta=-\\frac ba,\\qquad \\alpha\\beta=\\frac ca,\\qquad |\\alpha-\\beta|=\\frac{\\sqrt D}{|a|}",
+          "\\alpha^2+\\beta^2=(\\alpha+\\beta)^2-2\\alpha\\beta,\\qquad \\frac1\\alpha+\\frac1\\beta=\\frac{\\alpha+\\beta}{\\alpha\\beta}",
+          "\\text{Equation from roots: }x^2-(\\alpha+\\beta)x+\\alpha\\beta=0"
+        ],
+        "keyTakeaway": "Symmetric functions of the roots never need the roots — use sum and product."
+      },
+      "voiceScript": "Vieta's relations are the workhorse of this chapter. The sum of the roots is minus b over a, and the product is c over a. These hold even when the roots are complex, which is why they are so useful. The key insight is that any symmetric function of the roots, meaning any expression that does not change when you swap alpha and beta, can be built from just the sum and the product. You never need to solve the equation. So alpha squared plus beta squared is the sum squared minus twice the product. One over alpha plus one over beta is the sum divided by the product. And the difference in modulus is root D over the modulus of a. You can also run Vieta backwards: if you are told the sum and product of two numbers, the quadratic they satisfy is x squared minus the sum times x plus the product equals zero. For a cubic, Vieta gives three relations: the sum of the roots, the sum of the products taken two at a time, and the product of all three."
+    },
+    {
+      "slideNumber": 3,
+      "title": "Nature of roots — the full decision table",
+      "content": {
+        "bullets": [
+          "D > 0 → real and distinct; D = 0 → real and equal (both −b/2a); D < 0 → non-real conjugate pair.",
+          "With rational coefficients: D a perfect square → rational roots; D not a perfect square → irrational roots occurring in conjugate surd pairs.",
+          "With real coefficients, non-real roots ALWAYS come in conjugate pairs — so a cubic has at least one real root.",
+          "Both roots positive ⟺ sum > 0, product > 0, D ≥ 0. Both negative ⟺ sum < 0, product > 0, D ≥ 0.",
+          "Roots equal in magnitude but opposite in sign ⟹ b = 0. Reciprocal roots ⟹ a = c."
+        ],
+        "latexFormulas": [
+          "D=b^2-4ac\\ \\begin{cases}>0\\ \\text{distinct real}\\\\=0\\ \\text{equal real}\\\\<0\\ \\text{conjugate complex}\\end{cases}",
+          "\\text{both positive}:\\ \\alpha+\\beta>0,\\ \\alpha\\beta>0,\\ D\\ge0",
+          "b=0\\Rightarrow\\ \\text{roots are }\\pm\\sqrt{-c/a};\\qquad a=c\\Rightarrow\\ \\text{roots are reciprocals}"
+        ],
+        "keyTakeaway": "Sign of the roots comes from sum and product — you never need D for that part."
+      },
+      "voiceScript": "Here is the complete decision table for the nature of the roots. Discriminant positive gives two real distinct roots. Zero gives equal real roots, both being minus b over two a. Negative gives a conjugate complex pair. Now the finer points that exams actually test. If the coefficients are rational and the discriminant is a perfect square, the roots are rational. If the discriminant is positive but not a perfect square, the roots are irrational and they occur as conjugate surds, like two plus root three and two minus root three. With real coefficients, non real roots always come in conjugate pairs, and an important corollary is that every cubic equation with real coefficients has at least one real root, because the third root cannot be left unpaired. For the signs of the roots, use the sum and the product: both roots are positive when the sum is positive, the product is positive, and the discriminant is non negative. Both negative when the sum is negative and the product positive. Two beautiful shortcuts: if b is zero, the roots are equal in magnitude and opposite in sign; if a equals c, the roots are reciprocals of each other."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Location of roots — where the parabola does the thinking",
+      "content": {
+        "bullets": [
+          "Let f(x) = ax² + bx + c. Sketch it: the sign of a gives the opening, the roots are the x-intercepts, and the vertex is at −b/2a.",
+          "Both roots in (p, q): D ≥ 0, af(p) > 0, af(q) > 0, and p < −b/2a < q.",
+          "Exactly one root in (p, q): f(p)·f(q) < 0 — the Intermediate Value property, and only ONE condition is needed.",
+          "Both roots greater than k: D ≥ 0, af(k) > 0, and −b/2a > k. Both less than k: same with the vertex inequality reversed.",
+          "One root > k and the other < k: simply af(k) < 0 — the cleanest condition in the chapter."
+        ],
+        "latexFormulas": [
+          "\\text{both roots in }(p,q):\\ D\\ge0,\\ af(p)>0,\\ af(q)>0,\\ p<-\\frac b{2a}<q",
+          "\\text{exactly one root in }(p,q):\\ f(p)f(q)<0",
+          "\\text{one root}>k,\\ \\text{other}<k:\\ af(k)<0",
+          "\\text{both roots}>k:\\ D\\ge0,\\ af(k)>0,\\ -\\frac b{2a}>k"
+        ],
+        "keyTakeaway": "Multiply the endpoint values by a — not by 1. Forgetting the 'a' breaks every condition when the parabola opens downward."
+      },
+      "voiceScript": "Location of roots is where students panic, and the fix is a picture. Sketch the parabola. The sign of a tells you whether it opens upward or downward, the roots are where it crosses the x axis, and the vertex sits at minus b over two a. Now read the conditions off the sketch. For both roots to lie between p and q, you need three things: the discriminant non negative so the roots are real, a times f of p positive and a times f of q positive, meaning both endpoints lie on the same side as the opening, and the vertex x coordinate strictly between p and q. For exactly one root in the interval, only one condition is needed: f of p times f of q is negative, because the curve must cross the axis between them. For one root greater than k and the other less than k, simply a times f of k is negative. And for both roots greater than k: discriminant non negative, a times f of k positive, and the vertex beyond k. The detail everyone forgets is the factor of a in front of f. It matters whenever the parabola opens downward."
+    },
+    {
+      "slideNumber": 5,
+      "title": "Common roots, and inequalities from a quadratic",
+      "content": {
+        "bullets": [
+          "One common root of a₁x²+b₁x+c₁=0 and a₂x²+b₂x+c₂=0: cross-multiply the condition, or subtract the equations to find the root directly.",
+          "Both roots common ⟺ the coefficients are proportional: a₁/a₂ = b₁/b₂ = c₁/c₂.",
+          "The common root α satisfies α = (c₁a₂ − c₂a₁)/(a₁b₂ − a₂b₁), and the condition is (c₁a₂ − c₂a₁)² = (a₁b₂ − a₂b₁)(b₁c₂ − b₂c₁).",
+          "Quadratic inequality: ax² + bx + c > 0 for all real x ⟺ a > 0 and D < 0.",
+          "ax² + bx + c < 0 for all real x ⟺ a < 0 and D < 0. If a > 0 and D > 0, the expression is positive OUTSIDE the roots.",
+          "Sign scheme (wavy curve method) beats test-point substitution every time for multi-factor inequalities."
+        ],
+        "latexFormulas": [
+          "\\text{both roots common}\\iff\\frac{a_1}{a_2}=\\frac{b_1}{b_2}=\\frac{c_1}{c_2}",
+          "a>0,\\ D<0\\Rightarrow ax^2+bx+c>0\\ \\forall x\\in\\mathbb R",
+          "a>0,\\ D>0:\\ ax^2+bx+c>0\\ \\text{for }x<\\alpha\\ \\text{or}\\ x>\\beta"
+        ],
+        "keyTakeaway": "'Always positive' means a > 0 AND D < 0 — both conditions, never just one."
+      },
+      "voiceScript": "Two more toolkits. First, common roots. If both roots of the two quadratics are common, then the coefficients are proportional, a one over a two equals b one over b two equals c one over c two. If only one root is common, the fastest practical method is to subtract the two equations, which eliminates the squared term and leaves a linear equation giving you the common root directly. Then substitute back to verify. The standard condition is worth knowing as a formula, but in a timed paper, subtraction is quicker and less error prone. Second, inequalities from a quadratic. For a x squared plus b x plus c to be positive for all real x, you need two conditions together: a greater than zero so the parabola opens upward, and the discriminant less than zero so it never touches the axis. Missing either condition is the classic error. For always negative, both flip: a negative and discriminant negative. If a is positive and the discriminant is positive, the expression is positive outside the two roots and negative between them. For inequalities with several factors, use the wavy curve method rather than plugging in test values, it is far faster and never misses an interval."
+    },
+    {
+      "slideNumber": 6,
+      "title": "Related equations that reduce to a quadratic",
+      "content": {
+        "bullets": [
+          "Reciprocal equations and equations of the form a[f(x)]² + b f(x) + c = 0 — substitute t = f(x), solve, then back-substitute.",
+          "Modulus quadratics: |x|² = x², so replace |x| by t ≥ 0, solve the quadratic, then reject negative t values.",
+          "Exponential and logarithmic quadratics: with t = 2ˣ or t = log x, remember the domain restriction t > 0.",
+          "Trigonometric quadratics in sin x or cos x: the extra restriction is −1 ≤ t ≤ 1, which usually kills one root.",
+          "Symmetric systems: given x + y and xy, the pair x, y are the roots of t² − (sum)t + product = 0."
+        ],
+        "latexFormulas": [
+          "|x|^2-5|x|+6=0\\Rightarrow t^2-5t+6=0,\\ t=|x|\\ge0\\Rightarrow t=2,3\\Rightarrow x=\\pm2,\\pm3",
+          "4^x-3\\cdot2^x+2=0\\Rightarrow t^2-3t+2=0,\\ t=2^x>0\\Rightarrow t=1,2\\Rightarrow x=0,1",
+          "2\\sin^2x-3\\sin x+1=0\\Rightarrow \\sin x=1,\\tfrac12\\ (\\text{both valid})"
+        ],
+        "keyTakeaway": "After substituting, always carry the domain restriction on t — it is where extra or invalid roots appear."
+      },
+      "voiceScript": "A very large fraction of questions that look hard are just quadratics wearing a costume. The pattern is a times f of x squared, plus b times f of x, plus c equals zero, where the same inner function appears squared and to the first power. Substitute t equals f of x, solve the quadratic in t, then back substitute. The costumes include modulus, exponential, logarithmic and trigonometric functions. For modulus, note that modulus x squared is simply x squared, so substitute t equals modulus x, which must be non negative, and reject any negative root of t. For exponentials, substitute t equals two to the x, and t must be strictly positive. For trigonometric equations in sine or cosine, the extra restriction is that t lies between minus one and one, which frequently kills one of the two roots. And a lovely application: if you are given the sum and the product of two unknowns, then those two unknowns are precisely the roots of t squared minus the sum times t plus the product equals zero, so you can find them without any guesswork. The rule for all of these: after substituting, carry the domain restriction on t with you, because that is exactly where invalid roots sneak in."
+    },
+    {
+      "slideNumber": 7,
+      "title": "Speed tricks, traps and the practice plan",
+      "content": {
+        "bullets": [
+          "Trick: if a + b + c = 0, then one root is 1 and the other is c/a. If a − b + c = 0, then one root is −1.",
+          "Trick: roots in the ratio m:n ⟹ mn·b² = (m+n)²·ac. Roots differing by a fixed amount ⟹ use |α − β| = √D/|a|.",
+          "Trick: for equal roots, D = 0 gives an equation in the unknown coefficient — the standard 'find k' question.",
+          "Trap 1: forgetting a ≠ 0 when a problem says 'the equation is quadratic'.",
+          "Trap 2: dropping the factor of a in the location-of-roots conditions.",
+          "Trap 3: applying sum and product formulas to an equation that is not in standard form (e.g. after multiplying through).",
+          "Trap 4: in inequality questions, forgetting the case D = 0 separately when the inequality is non-strict.",
+          "Practice: 20 nature-of-roots, 15 location-of-roots, 10 inequalities, 10 disguised quadratics."
+        ],
+        "latexFormulas": [
+          "a+b+c=0\\Rightarrow\\ \\text{roots }1,\\ \\frac ca;\\qquad a-b+c=0\\Rightarrow\\ \\text{roots }-1,\\ -\\frac ca",
+          "\\text{roots in ratio }m:n\\Rightarrow mn\\,b^2=(m+n)^2ac",
+          "|\\alpha-\\beta|=k\\Rightarrow D=k^2a^2"
+        ],
+        "keyTakeaway": "Check a + b + c = 0 and a − b + c = 0 first — they hand you a root for free in seconds."
+      },
+      "voiceScript": "Let us finish with speed and traps. Two free roots: if a plus b plus c equals zero, one root is one and the other is c over a. If a minus b plus c equals zero, one root is minus one. Always test these two before doing any algebra, they take three seconds. If the roots are in a given ratio m is to n, there is a compact condition: m n times b squared equals m plus n whole squared times a c. If the roots differ by a given amount, use the difference formula, root D over modulus a. For the standard find the value of k questions where the roots are equal, set the discriminant to zero and solve. Now the traps. Do not forget that a must be non zero. In the location of roots conditions, do not drop the factor of a in front of f. Make sure the equation is in standard form before applying sum and product, especially after you have multiplied through by something. And in inequality questions where the inequality is non strict, treat the discriminant equals zero case separately. For practice, twenty nature of root questions, fifteen location of root questions, ten inequalities and ten disguised quadratics will make this chapter automatic."
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "id": "math-limits-continuity",
+  "mode": "LECTURE",
+  "subject": "Mathematics",
+  "topic": "Limits, Continuity & Differentiability",
+  "targetExam": "JEE Main",
+  "tagline": "The gateway to calculus — forms, standard limits, L'Hospital and the three tests of continuity.",
+  "tags": [
+    "calculus",
+    "foundation",
+    "L'Hospital",
+    "concept-heavy"
+  ],
+  "prerequisites": [
+    "Basic trigonometry",
+    "Inequalities"
+  ],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "What a limit is — and what it is not",
+      "content": {
+        "bullets": [
+          "A limit describes the value a function approaches as x approaches a point — it says nothing about the value AT that point.",
+          "The function need not even be defined at x = a for the limit to exist.",
+          "lim exists ⟺ left-hand limit = right-hand limit = a finite number.",
+          "Three failure modes: the two one-sided limits differ (jump), the function blows up (infinite limit), or it oscillates without settling."
+        ],
+        "latexFormulas": [
+          "\\lim_{x\\to a}f(x)=L\\iff \\lim_{x\\to a^-}f(x)=\\lim_{x\\to a^+}f(x)=L",
+          "\\lim_{x\\to0}\\sin\\frac1x\\ \\text{does not exist (oscillates)},\\qquad \\lim_{x\\to0}\\frac{|x|}{x}\\ \\text{does not exist}\\ (=\\pm1)"
+        ],
+        "keyTakeaway": "Limit ≠ function value. That distinction is the entire source of continuity questions."
+      },
+      "voiceScript": "Let us begin with the idea, not the algebra. A limit describes the value a function approaches as x approaches a point, and it tells you nothing about the value at that point. In fact the function may not even be defined there, and the limit can still exist perfectly well. Formally, we say the limit exists only when the left hand limit and the right hand limit both exist, are finite, and are equal to each other. There are three ways a limit fails to exist. The two sides approach different numbers, which is a jump discontinuity. The function grows without bound, which is an infinite limit. Or the function oscillates and never settles, like sine of one over x as x tends to zero. A sharp example to remember: modulus x divided by x as x tends to zero gives plus one from the right and minus one from the left, so the limit does not exist."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Evaluate the form first — always",
+      "content": {
+        "bullets": [
+          "Substitute the limiting value immediately and read off the form. This single habit decides which tool you may use.",
+          "Seven indeterminate forms: 0/0, ∞/∞, 0·∞, ∞−∞, 1^∞, 0^0, ∞^0.",
+          "A finite non-zero number over zero is NOT indeterminate — the limit is infinite (or does not exist).",
+          "Convert the awkward forms into 0/0 or ∞/∞ before applying any rule: 0·∞ → rewrite as a fraction, ∞−∞ → rationalise or factor, exponentials → take log."
+        ],
+        "latexFormulas": [
+          "\\frac00,\\ \\frac\\infty\\infty,\\ 0\\cdot\\infty,\\ \\infty-\\infty,\\ 1^\\infty,\\ 0^0,\\ \\infty^0",
+          "\\frac{a}{0^{\\pm}}=\\pm\\infty\\ (a\\ne0)\\Rightarrow\\ \\text{limit does not exist}",
+          "1^\\infty:\\ \\lim f^g=e^{\\lim g(f-1)}"
+        ],
+        "keyTakeaway": "Name the form before choosing the tool — L'Hospital is legal only for 0/0 and ∞/∞."
+      },
+      "voiceScript": "Here is the discipline that will save you more time than any formula. Before doing any algebra, substitute the limiting value into the expression and read off the form. Say it out loud in your head: is this zero by zero, infinity by infinity, one to the infinity? This matters because the tools are only legal for specific forms. L'Hospital's rule applies only to zero by zero and infinity by infinity, and using it on anything else gives wrong answers that look plausible. There are seven indeterminate forms, and I have listed them here. Note carefully what is not indeterminate: a finite non zero number divided by zero is not a problem to solve, it means the limit is infinite. When you meet the awkward forms, your first job is conversion. Zero times infinity, rewrite as a fraction. Infinity minus infinity, rationalise or factorise. Exponential forms like one to the infinity, take the logarithm, or use the direct result that the limit is e raised to the limit of g times f minus one."
+    },
+    {
+      "slideNumber": 3,
+      "title": "The standard limits you must own",
+      "content": {
+        "bullets": [
+          "Trigonometric: sin x / x → 1, tan x / x → 1, (1 − cos x)/x → 0, and (1 − cos x)/x² → 1/2 as x → 0.",
+          "Exponential: (eˣ − 1)/x → 1, aˣ − 1 over x → ln a, and ln(1+x)/x → 1.",
+          "Binomial: (1+x)ⁿ − 1 over x → n as x → 0 — the generalised version of the same idea.",
+          "The two definitions of e: (1+x)^(1/x) as x → 0, and (1 + 1/x)^x as x → ∞.",
+          "Algebraic: (xⁿ − aⁿ)/(x − a) → n·aⁿ⁻¹ — a disguised derivative, and very often the fastest route."
+        ],
+        "latexFormulas": [
+          "\\lim_{x\\to0}\\frac{\\sin x}{x}=1,\\quad \\lim_{x\\to0}\\frac{\\tan x}{x}=1,\\quad \\lim_{x\\to0}\\frac{1-\\cos x}{x^2}=\\frac12",
+          "\\lim_{x\\to0}\\frac{e^x-1}{x}=1,\\quad \\lim_{x\\to0}\\frac{\\ln(1+x)}{x}=1,\\quad \\lim_{x\\to0}\\frac{(1+x)^n-1}{x}=n",
+          "\\lim_{x\\to0}(1+x)^{1/x}=e,\\qquad \\lim_{x\\to\\infty}\\left(1+\\frac1x\\right)^x=e"
+        ],
+        "keyTakeaway": "Every hard limit is a standard limit wearing a disguise — spot the disguise and you are done."
+      },
+      "voiceScript": "These standard limits are the alphabet of calculus, and the questions in JEE Main are almost always these in disguise. The trigonometric ones: sine x over x tends to one, tan x over x tends to one, and one minus cosine x over x squared tends to one half. Note that one minus cosine x over x tends to zero, so be careful about the power in the denominator. The exponential ones: e to the x minus one over x tends to one, natural log of one plus x over x tends to one, and the generalised binomial form, one plus x raised to n minus one, over x, tends to n. The number e itself has two definitions, one from x tending to zero and one from x tending to infinity, and both appear in one to the infinity type questions. Finally, x to the n minus a to the n, over x minus a, tends to n times a to the n minus one. This one is secretly the definition of the derivative of x to the n, and recognising that is often the fastest path to the answer."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Techniques — factorise, rationalise, expand, substitute, L'Hospital",
+      "content": {
+        "bullets": [
+          "Factorise first for polynomial 0/0 forms — cancel the offending (x − a) factor.",
+          "Rationalise when square roots create 0/0 or ∞ − ∞.",
+          "Series expansion (binomial/Taylor) is the most powerful tool for JEE Advanced, especially with mixed trig and exponential terms.",
+          "Substitution: for x → a, put x = a + h with h → 0; for x → ∞, put x = 1/h with h → 0.",
+          "L'Hospital: differentiate numerator and denominator SEPARATELY (this is not the quotient rule) and repeat while the form stays indeterminate."
+        ],
+        "latexFormulas": [
+          "(1+x)^n=1+nx+\\frac{n(n-1)}{2}x^2+\\cdots,\\quad e^x=1+x+\\frac{x^2}{2!}+\\cdots",
+          "\\sin x=x-\\frac{x^3}{3!}+\\cdots,\\quad \\ln(1+x)=x-\\frac{x^2}{2}+\\cdots",
+          "\\lim_{x\\to a}\\frac{f(x)}{g(x)}=\\lim_{x\\to a}\\frac{f'(x)}{g'(x)}\\quad\\text{if still }\\frac00\\text{ or }\\frac\\infty\\infty"
+        ],
+        "keyTakeaway": "L'Hospital differentiates top and bottom separately — it is NOT the quotient rule."
+      },
+      "voiceScript": "Now the toolbox, in the order you should reach for it. Factorise first, because for polynomial zero by zero forms the problem is usually a common factor of x minus a waiting to be cancelled. If square roots create the indeterminate form, rationalise. For Advanced level questions mixing trigonometric, exponential and logarithmic terms, series expansion is the most powerful tool you have: expand each function to the lowest order that survives, and the answer falls out. Use substitution to convert awkward limits into the standard x tending to zero case, putting x equals a plus h, or x equals one over h for limits at infinity. Finally, L'Hospital's rule. And here is the misconception I need to kill right now: L'Hospital is not the quotient rule. You differentiate the numerator and the denominator separately, and you may repeat the process as long as the form remains indeterminate. It is a wonderful tool for zero by zero, but for many Advanced problems expansion is faster and safer."
+    },
+    {
+      "slideNumber": 5,
+      "title": "Continuity — the three-condition test",
+      "content": {
+        "bullets": [
+          "f is continuous at x = a iff: (i) f(a) is defined, (ii) lim(x→a) f(x) exists, (iii) the limit equals f(a).",
+          "For piecewise functions, continuity is only ever in question at the junction points — everywhere else the pieces are elementary and continuous.",
+          "Types of discontinuity: removable (limit exists but ≠ f(a), or f(a) undefined), jump (one-sided limits differ), infinite (blow-up), oscillatory.",
+          "Algebra of continuity: sums, products, quotients (non-zero denominator) and compositions of continuous functions are continuous.",
+          "Polynomials are continuous everywhere; rational functions are continuous except where the denominator vanishes."
+        ],
+        "latexFormulas": [
+          "\\lim_{x\\to a^-}f(x)=\\lim_{x\\to a^+}f(x)=f(a)",
+          "\\text{Removable: }\\lim_{x\\to a}f\\ \\text{exists but}\\ne f(a);\\quad \\text{Jump: }f(a^+)\\ne f(a^-)",
+          "f(x)=\\begin{cases}\\frac{\\sin 3x}{x},&x\\ne0\\\\k,&x=0\\end{cases}\\ \\text{continuous}\\iff k=3"
+        ],
+        "keyTakeaway": "Continuity questions are 'find the value of k' questions — set the limit equal to f(a) and solve."
+      },
+      "voiceScript": "Continuity is the limit idea with one extra requirement. A function is continuous at a point when three things hold together. The function is defined at that point. The limit exists at that point. And the two are equal. For piecewise defined functions, which is how exams ask this, continuity is only ever in doubt at the junction points, because each piece on its own is an elementary continuous function. So your entire job is to compute the left and right limits at the junction and set them equal to the defined value, which is usually an unknown constant k. That is the standard find the value of k question. You should also be able to classify discontinuities. Removable means the limit exists but does not equal the function value, or the function is not defined there at all, and you could fix it by redefining a single point. Jump means the two one sided limits differ. Infinite means the function blows up. And oscillatory means it never settles. Finally, continuity is preserved under addition, multiplication, division by a non zero function, and composition."
+    },
+    {
+      "slideNumber": 6,
+      "title": "Differentiability — stronger than continuity",
+      "content": {
+        "bullets": [
+          "f is differentiable at a iff the limit of [f(a+h) − f(a)]/h exists, i.e. the left and right derivatives are equal and finite.",
+          "Differentiable ⟹ continuous, but continuous ⇏ differentiable. |x| at 0 is the counterexample.",
+          "Non-differentiable points: corners/kinks (|x|), cusps (x^(2/3)), vertical tangents (x^(1/3)), and jump discontinuities.",
+          "Geometrically, differentiability means a unique tangent exists; a sharp point has two competing tangents.",
+          "For piecewise functions, check continuity at the junction FIRST, then match the derivatives from both sides."
+        ],
+        "latexFormulas": [
+          "f'(a^-)=f'(a^+)\\ \\text{and finite}\\Rightarrow\\ \\text{differentiable}",
+          "f(x)=|x|:\\ f'(0^-)=-1,\\ f'(0^+)=+1\\Rightarrow\\ \\text{not differentiable, but continuous}",
+          "\\text{Differentiable}\\Rightarrow\\text{Continuous}\\quad(\\text{converse false})"
+        ],
+        "keyTakeaway": "A corner is continuous but not differentiable — this is the single most tested distinction in the chapter."
+      },
+      "voiceScript": "Differentiability is a stronger demand than continuity. A function is differentiable at a point when the limit of f of a plus h minus f of a, divided by h, exists, which means the left hand derivative and the right hand derivative are equal and finite. Geometrically, this means a unique tangent line exists at that point. Now the relationship between the two concepts, stated precisely: every differentiable function is continuous, but the converse is false. The counterexample you must know cold is modulus x at zero. It is continuous there, the limit exists and equals the function value, but the left derivative is minus one and the right derivative is plus one, so no unique tangent exists. It is a corner. Other non differentiable points include cusps like x to the two thirds, vertical tangents like x to the one third where the derivative becomes infinite, and of course any jump discontinuity. For piecewise functions in the exam, run the checks in order: verify continuity at the junction first, then match the derivatives from both sides."
+    },
+    {
+      "slideNumber": 7,
+      "title": "The exam playbook and the classic traps",
+      "content": {
+        "bullets": [
+          "Playbook: substitute and name the form → pick the tool (standard limit / factorise / expand / L'Hospital) → evaluate → for continuity, equate to f(a).",
+          "Trap 1: applying L'Hospital to a non-indeterminate form, or to a piecewise function at the junction point.",
+          "Trap 2: forgetting that the limit of sin(1/x) as x → 0 does not exist even though it is bounded between −1 and 1 (use Sandwich for x·sin(1/x) → 0).",
+          "Trap 3: assuming continuity implies differentiability.",
+          "Trap 4: taking one-sided limits from the wrong side in modulus or greatest-integer questions.",
+          "Trap 5: in 1^∞ forms, forgetting the exponent in e^(lim g(f−1)).",
+          "Useful: Sandwich (Squeeze) theorem for anything bounded times something that tends to zero."
+        ],
+        "latexFormulas": [
+          "g(x)\\le f(x)\\le h(x),\\ \\lim g=\\lim h=L\\Rightarrow\\lim f=L",
+          "\\lim_{x\\to0}x\\sin\\frac1x=0\\quad(\\text{bounded}\\times\\text{zero})"
+        ],
+        "keyTakeaway": "Name the form, then choose the tool — never the other way round."
+      },
+      "voiceScript": "Here is the playbook to run under time pressure. Substitute the limiting value and name the form out loud. Choose the tool that matches the form: a standard limit if you can spot the disguise, factorisation for polynomials, rationalisation for roots, series expansion for mixed functions, and L'Hospital as a reliable fallback for zero by zero and infinity by infinity. Evaluate, and if it is a continuity question, set the result equal to the function's defined value. Now the traps. Never apply L'Hospital to a form that is not indeterminate, and never apply it at the junction point of a piecewise function. Remember that sine of one over x has no limit at zero even though it is trapped between minus one and one, but x times sine of one over x does tend to zero, by the Sandwich theorem, because bounded times zero is zero. Do not assume continuity gives differentiability. In modulus and greatest integer questions, be very careful about which side you approach from. And in one to the infinity forms, do not forget the exponent in the final answer. Practise fifteen limits and five piecewise continuity problems with this playbook, and the chapter is secured."
+    }
+  ]
+}

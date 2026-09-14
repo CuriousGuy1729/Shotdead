@@ -1,0 +1,150 @@
+{
+  "id": "chem-bonding-vsepr-mot",
+  "mode": "LECTURE",
+  "subject": "Chemistry",
+  "topic": "Chemical Bonding — VSEPR, Hybridisation & MO Theory",
+  "targetExam": "JEE Main",
+  "tagline": "Shape, bond angle, dipole and bond order — the most visual chapter, and the one you can score in full.",
+  "tags": ["inorganic", "conceptual", "NCERT-direct", "visual"],
+  "prerequisites": ["Electronic configuration", "Periodic trends"],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "Why atoms bond: energy, octet and its failures",
+      "content": {
+        "bullets": [
+          "Bond formation is exothermic: the bonded state is lower in energy than separated atoms, and bond energy is the cost of breaking it.",
+          "The octet rule is a guide, not a law — it fails for electron-deficient (BF₃, BeCl₂), expanded-octet (PCl₅, SF₆) and odd-electron species (NO, NO₂).",
+          "Ionic bonds need a large electronegativity difference plus low ionisation energy of the metal; covalent bonds share electrons between similar atoms.",
+          "Fajans' rules: small cation + large anion + high charge → greater covalent character in an 'ionic' compound."
+        ],
+        "latexFormulas": [
+          "\\text{Bond enthalpy: }\\Delta H_{bond}>0\\ \\text{to break},\\ <0\\ \\text{to form}",
+          "\\text{Fajans: covalent character}\\propto\\frac{\\text{charge on cation}}{\\text{size of cation}}",
+          "\\text{Lattice enthalpy}\\propto\\frac{q_+q_-}{r_++r_-}"
+        ],
+        "keyTakeaway": "The octet rule has three documented failure types — learn the examples, NEET asks them verbatim."
+      },
+      "voiceScript": "Start with the reason bonds exist at all. Bond formation releases energy, because the bonded arrangement is lower in energy than the separated atoms. The bond enthalpy you see in tables is the energy needed to break that bond, so it is positive for breaking and negative for forming. The octet rule is a useful guide, but you must know its three failures by heart. Electron deficient species like boron trifluoride and beryllium chloride have fewer than eight electrons around the central atom. Expanded octet species like phosphorus pentachloride and sulphur hexafluoride use d orbitals to hold more than eight. And odd electron species like nitric oxide cannot pair everything up. Also remember Fajans' rules, which explain why a supposedly ionic compound shows covalent character: a small, highly charged cation polarises a large anion."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Lewis structures & formal charge",
+      "content": {
+        "bullets": [
+          "Total valence electrons first; add or subtract for ionic charge; place the least electronegative atom in the centre (H and F are never central).",
+          "Form single bonds, complete octets of outer atoms, then give leftovers to the central atom.",
+          "Formal charge identifies the best structure: smallest magnitudes, negative charge on the more electronegative atom.",
+          "Only electrons move in resonance, never nuclei — if an atom moved, it is a different compound."
+        ],
+        "latexFormulas": [
+          "\\text{FC}=V-\\frac{1}{2}(\\text{bonding }e^-)-(\\text{lone }e^-)",
+          "\\text{Best Lewis structure: }\\sum|\\text{FC}|\\ \\text{minimum},\\ \\text{negative FC on more EN atom}",
+          "\\text{Bond order in resonance}=\\frac{\\text{total bonds}}{\\text{bond positions}}"
+        ],
+        "keyTakeaway": "Formal charge is a bookkeeping device, not a real charge on the atom."
+      },
+      "voiceScript": "Drawing Lewis structures is a procedure, not a talent. Count the total valence electrons, adding one for each negative charge and removing one for each positive charge. Put the least electronegative atom in the centre, remembering that hydrogen and fluorine are never central. Draw single bonds, complete the octets of the surrounding atoms, and hand the leftover electrons to the central atom. Then compute the formal charge on each atom using this formula: valence electrons, minus half the bonding electrons, minus the lone pair electrons. The best structure minimises the magnitudes of formal charge and puts any negative formal charge on the most electronegative atom. When several structures have the same skeleton but different electron positions, they are resonance structures, and the real molecule is a hybrid, more stable than any single one. The rule for resonance: only electrons move. If a nucleus changed position, you have drawn a different compound."
+    },
+    {
+      "slideNumber": 3,
+      "title": "VSEPR — geometry, shape and bond angles",
+      "content": {
+        "bullets": [
+          "Electron pairs around the central atom repel and settle as far apart as possible; lone pairs repel more strongly than bond pairs.",
+          "Repulsion order: lp–lp > lp–bp > bp–bp, which is why bond angles shrink as lone pairs are added.",
+          "Geometry is named from electron-pair arrangement; shape is named from atom positions only.",
+          "Standard set: 2 → linear (180°), 3 → trigonal planar (120°), 4 → tetrahedral (109.5°), 5 → trigonal bipyramidal (120°/90°), 6 → octahedral (90°)."
+        ],
+        "latexFormulas": [
+          "\\text{Steric number}=\\sigma\\ \\text{bonds}+\\text{lone pairs}",
+          "H_2O:\\ SN=4\\Rightarrow sp^3,\\ \\text{tetrahedral geometry},\\ \\text{bent shape},\\ 104.5^\\circ",
+          "NH_3:\\ SN=4,\\ \\text{trigonal pyramidal},\\ 107^\\circ;\\quad SF_4:\\ SN=5,\\ \\text{see-saw}"
+        ],
+        "keyTakeaway": "Water is 104.5° and ammonia 107° — both less than 109.5° because lone pairs push harder."
+      },
+      "voiceScript": "VSEPR is the theory of shapes, and its logic is beautifully simple. Electron pairs around a central atom repel each other and arrange themselves as far apart as possible. But not all pairs repel equally. A lone pair is held by one nucleus, so it is fatter and closer in, and it repels more strongly. The order is lone pair to lone pair, then lone pair to bond pair, then bond pair to bond pair. That is exactly why the bond angle in methane is the ideal one hundred nine point five degrees, in ammonia it shrinks to one hundred seven because of one lone pair, and in water to one hundred four point five because of two. Keep the two vocabulary words separate: geometry describes the arrangement of all electron pairs, while shape describes only where the atoms sit. Water has tetrahedral geometry but a bent shape. And remember the steric number, sigma bonds plus lone pairs, which is the bridge to hybridisation."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Hybridisation — count, don't memorise",
+      "content": {
+        "bullets": [
+          "Hybridisation is a mathematical mixing of atomic orbitals to produce equivalent orbitals that explain observed geometry.",
+          "Number of hybrid orbitals = steric number; a double bond counts as ONE sigma bond for this count.",
+          "SN 2 → sp, 3 → sp², 4 → sp³, 5 → sp³d, 6 → sp³d², 7 → sp³d³.",
+          "Quick formula for the steric number using valence electrons works well for main-group species.",
+          "s-character concentrates in the orbital holding the lone pair; more s-character in a bond → shorter, stronger bond."
+        ],
+        "latexFormulas": [
+          "SN=\\frac{1}{2}\\left[V+M-C+A\\right]",
+          "V=\\text{valence }e^-\\text{ of central atom},\\ M=\\text{monovalent atoms},\\ C=\\text{cationic charge},\\ A=\\text{anionic charge}",
+          "\\text{s-character: }sp=50\\%,\\ sp^2=33\\%,\\ sp^3=25\\%\\Rightarrow\\ \\text{acidity of alkyne} > \\text{alkene} > \\text{alkane}"
+        ],
+        "keyTakeaway": "Hybridisation explains shape; it does not cause it — VSEPR is the physical reason."
+      },
+      "voiceScript": "Hybridisation is a model, a mathematical mixing of atomic orbitals, introduced to explain the geometries VSEPR predicts. Please do not memorise the hybridisation of individual molecules. Instead, count. The steric number, sigma bonds plus lone pairs, tells you everything: two gives s p, three gives s p two, four gives s p three, five gives s p three d, and six gives s p three d two. A double or triple bond counts as one sigma bond for this purpose, since only the sigma bond occupies a hybrid orbital. For a quick calculation you can use this formula: half of V plus M minus C plus A, where V is the number of valence electrons on the central atom, M is the number of monovalent atoms attached, C is the cationic charge and A the anionic charge. One organic chemistry payoff: s character increases the electronegativity of the carbon, which is why terminal alkynes are more acidic than alkenes and alkanes."
+    },
+    {
+      "slideNumber": 5,
+      "title": "Dipole moment, polarity and hydrogen bonding",
+      "content": {
+        "bullets": [
+          "Dipole moment is a vector: μ = q × d, in Debye (1 D = 3.336 × 10⁻³⁰ C·m). Symmetric molecules have μ = 0 despite polar bonds.",
+          "BF₃, CCl₄, CO₂, SF₆ are non-polar because the bond dipoles cancel vectorially; NH₃ has μ > 0, NF₃ has a small μ due to the lone pair opposing the bonds.",
+          "Percent ionic character = (μ_observed / μ_theoretical) × 100.",
+          "Hydrogen bond needs H attached to F, O or N; it explains the anomalous boiling points of HF, H₂O, NH₃ and the lower density of ice.",
+          "Intramolecular H-bonding (o-nitrophenol) lowers boiling point; intermolecular (p-nitrophenol) raises it."
+        ],
+        "latexFormulas": [
+          "\\vec\\mu=q\\times\\vec d,\\qquad \\mu_{net}=\\sqrt{\\mu_1^2+\\mu_2^2+2\\mu_1\\mu_2\\cos\\theta}",
+          "\\%\\ \\text{ionic character}=\\frac{\\mu_{obs}}{\\mu_{theo}}\\times100",
+          "\\text{H-bond strength: }F\\!-\\!H\\cdots F>O\\!-\\!H\\cdots O>N\\!-\\!H\\cdots N"
+        ],
+        "keyTakeaway": "Polar bonds do not guarantee a polar molecule — symmetry decides."
+      },
+      "voiceScript": "Dipole moment is where vectors meet chemistry. Mu equals charge times the separation distance, measured in Debye. The key insight is that dipole moment is a vector, so a molecule with polar bonds can still be non polar if the geometry makes them cancel. Boron trifluoride, carbon tetrachloride, carbon dioxide and sulphur hexafluoride are all non polar for this reason. Ammonia is polar, and interestingly nitrogen trifluoride has a much smaller dipole moment because the lone pair's contribution opposes the three bond dipoles. You can even compute the percent ionic character by comparing the observed dipole moment with the theoretical value assuming complete electron transfer. Then hydrogen bonding, which requires hydrogen attached to fluorine, oxygen or nitrogen. It is the reason water, ammonia and hydrogen fluoride boil far above the trend of their groups, and why ice floats. One distinction NEET loves: intramolecular hydrogen bonding, as in ortho nitrophenol, lowers the boiling point, while intermolecular hydrogen bonding, as in the para isomer, raises it."
+    },
+    {
+      "slideNumber": 6,
+      "title": "Molecular orbital theory & bond order",
+      "content": {
+        "bullets": [
+          "Atomic orbitals combine into bonding (lower energy) and antibonding (higher energy, marked *) molecular orbitals; electrons fill by Aufbau, Pauli and Hund.",
+          "Bond order = ½(Nb − Na). Bond order 0 means the molecule does not exist (He₂).",
+          "Bond order ↑ → bond length ↓, bond energy ↑, stability ↑, and magnetism decided by unpaired electrons.",
+          "For O₂ and F₂ the σ2pz orbital lies BELOW the π2p orbitals; for N₂, C₂, B₂ the order swaps (s–p mixing).",
+          "O₂ is paramagnetic with two unpaired electrons in π*2p — MOT's greatest success over Lewis theory."
+        ],
+        "latexFormulas": [
+          "\\text{Bond order}=\\frac{N_b-N_a}{2}",
+          "N_2:\\ (\\sigma1s)^2(\\sigma^*1s)^2(\\sigma2s)^2(\\sigma^*2s)^2(\\pi2p)^4(\\sigma2p_z)^2,\\ BO=3",
+          "O_2:\\ BO=2,\\ \\text{two unpaired }e^-\\ \\text{in}\\ \\pi^*2p\\Rightarrow\\text{paramagnetic}"
+        ],
+        "keyTakeaway": "The orbital energy order swaps at N₂ — memorise which side of the periodic table you are on."
+      },
+      "voiceScript": "Molecular orbital theory is the chapter's heavyweight. When atomic orbitals combine, they form the same number of molecular orbitals: a bonding one at lower energy and an antibonding one at higher energy, marked with a star. You fill these with the molecule's electrons using the ordinary Aufbau, Pauli and Hund rules. Bond order is half the number of bonding electrons minus the number of antibonding electrons. A bond order of zero means the molecule does not exist, which is why helium dimer is not real. Higher bond order means shorter bond length, higher bond energy and greater stability. The detail that decides questions is the energy ordering. For oxygen and fluorine, the sigma two p z orbital lies below the pi two p orbitals. For nitrogen, carbon and boron, s p mixing swaps that order. And the crown jewel of this theory: oxygen has two unpaired electrons in the antibonding pi orbitals, so it is paramagnetic, something the simple Lewis structure completely fails to predict."
+    },
+    {
+      "slideNumber": 7,
+      "title": "Answer pattern + the traps that cost marks",
+      "content": {
+        "bullets": [
+          "Any shape question: count steric number → name geometry → remove lone pairs → name shape → state the angle and whether it is distorted.",
+          "Any magnetism question: write the MO configuration, count unpaired electrons, then state paramagnetic or diamagnetic.",
+          "Trap 1: counting a double bond as two sigma bonds when finding hybridisation.",
+          "Trap 2: calling NH₃ tetrahedral in shape — its geometry is tetrahedral, its shape is trigonal pyramidal.",
+          "Trap 3: using the O₂ orbital order for N₂.",
+          "Trap 4: declaring a molecule polar from polar bonds without checking symmetry.",
+          "Trap 5: forgetting that bond angle decreases as lone pairs increase within the same steric number."
+        ],
+        "latexFormulas": [
+          "\\text{Shape recipe: }SN\\to\\text{geometry}\\to\\text{shape}\\to\\text{angle}\\to\\mu",
+          "\\text{Magnetism recipe: MO config}\\to\\#\\ \\text{unpaired }e^-"
+        ],
+        "keyTakeaway": "Geometry and shape are two different words — examiners set questions purely on that distinction."
+      },
+      "voiceScript": "Let us convert all of this into a repeatable answer pattern. For any shape question, run this chain: count the steric number, name the geometry from it, then remove the lone pairs mentally and name the shape, then state the bond angle and mention if it is distorted from the ideal. For any magnetism question, write the molecular orbital configuration, count the unpaired electrons, and declare paramagnetic or diamagnetic. Now the traps. Do not count a double bond as two sigma bonds when finding hybridisation; it is one. Do not say ammonia is tetrahedral in shape, its geometry is tetrahedral but its shape is trigonal pyramidal, and that distinction alone is a question. Use the correct orbital energy order for nitrogen versus oxygen. Never call a molecule polar from polar bonds alone without checking symmetry. And within the same steric number, more lone pairs always means a smaller bond angle. Follow the chain, avoid the five traps, and this chapter is a full-score chapter for you."
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "id": "chem-mole-concept",
+  "mode": "LECTURE",
+  "subject": "Chemistry",
+  "topic": "Mole Concept & Stoichiometry",
+  "targetExam": "JEE Main",
+  "tagline": "The operating system of physical chemistry — convert everything to moles and the equation does the rest.",
+  "tags": ["physical chemistry", "numerical", "foundation", "concentration terms"],
+  "prerequisites": ["Atomic mass & formula writing", "Basic algebra"],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "The mole is a counting unit, nothing mystical",
+      "content": {
+        "bullets": [
+          "One mole = 6.022 × 10²³ elementary entities (Avogadro's number, NA).",
+          "Molar mass M is the mass of one mole in grams — numerically equal to the atomic or molecular mass in u.",
+          "Every numerical in physical chemistry converts to moles first, uses the balanced equation, then converts back.",
+          "The balanced equation's coefficients are mole ratios, never mass ratios — that is the single most common error."
+        ],
+        "latexFormulas": [
+          "n=\\frac{m}{M}=\\frac{N}{N_A}",
+          "N_A=6.022\\times10^{23}\\ \\mathrm{mol^{-1}}",
+          "\\text{mass ratio}\\ne\\text{mole ratio}:\\quad \\frac{n_A}{n_B}=\\frac{\\nu_A}{\\nu_B}"
+        ],
+        "keyTakeaway": "Coefficients compare moles. If you compare grams directly, the answer is wrong."
+      },
+      "voiceScript": "Let us strip the mystery off the mole. A mole is simply a counting unit, like a dozen, but much bigger: six point zero two two times ten to the twenty three particles. The molar mass is the mass of one mole expressed in grams, and numerically it equals the atomic or molecular mass you read off the periodic table. Now the workflow for every numerical in physical chemistry. Convert whatever you are given into moles. Use the balanced equation, whose coefficients are mole ratios. Then convert the answer back into grams, litres or particles. The mistake that costs the most marks is treating those coefficients as mass ratios. In the reaction of nitrogen with hydrogen to form ammonia, one mole of nitrogen needs three moles of hydrogen, which is twenty eight grams reacting with six grams, not one gram to three grams."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Four doors into the mole",
+      "content": {
+        "bullets": [
+          "From mass: n = m/M.",
+          "From particle count: n = N/NA.",
+          "From gas volume at STP: n = V/22.4 L (SATP uses 24.8 L at 1 bar, 25 °C).",
+          "From solution: n = Molarity × V(in litres), or molality × mass of solvent in kg.",
+          "For any gas condition use the ideal gas equation instead of 22.4 L, which is STP-only."
+        ],
+        "latexFormulas": [
+          "n=\\frac{m}{M}=\\frac{N}{N_A}=\\frac{V_{STP}}{22.4\\ \\mathrm{L}}=M\\cdot V_{(L)}",
+          "PV=nRT,\\quad R=0.0821\\ \\mathrm{L\\,atm\\,mol^{-1}K^{-1}}=8.314\\ \\mathrm{J\\,mol^{-1}K^{-1}}"
+        ],
+        "keyTakeaway": "22.4 L is valid only at STP for an ideal gas — everywhere else, use PV = nRT."
+      },
+      "voiceScript": "There are exactly four doors into the mole, and recognising which door a question uses is half the battle. Door one: you are given a mass, so divide by the molar mass. Door two: you are given a number of particles, divide by Avogadro's number. Door three: you are given the volume of a gas at standard temperature and pressure, divide by twenty two point four litres. Door four: you are given a solution, so multiply molarity by volume in litres. And here is the caution: twenty two point four litres belongs only to standard temperature and pressure. If the question gives any other temperature or pressure, switch to the ideal gas equation P V equals n R T, and choose R to match your pressure units. That unit match is where most gas law errors happen."
+    },
+    {
+      "slideNumber": 3,
+      "title": "Stoichiometry & the limiting reagent",
+      "content": {
+        "bullets": [
+          "Balance the equation first — an unbalanced equation makes every later step wrong but still looks plausible.",
+          "Limiting reagent test: divide the moles of each reactant by its own coefficient; the smallest quotient wins.",
+          "All product quantities are calculated from the limiting reagent only; the other reactant is left in excess.",
+          "Percent yield compares the actual yield with the theoretical yield from stoichiometry."
+        ],
+        "latexFormulas": [
+          "\\text{compare }\\frac{n_i}{\\nu_i}\\ \\Rightarrow\\ \\text{smallest is the limiting reagent}",
+          "\\text{Excess left}=n_{initial}-\\nu\\cdot\\left(\\frac{n_{LR}}{\\nu_{LR}}\\right)",
+          "\\%\\text{ yield}=\\frac{\\text{actual yield}}{\\text{theoretical yield}}\\times100"
+        ],
+        "keyTakeaway": "Divide by the coefficient before comparing — raw mole numbers lie."
+      },
+      "voiceScript": "Stoichiometry is arithmetic with a ratio, but the ratio must come from a balanced equation, so balancing is step zero. Then the limiting reagent. Here is the method that never fails: take the moles of each reactant and divide by its own coefficient in the balanced equation. The reactant with the smallest quotient is the limiting reagent, because it runs out first relative to what the equation demands. Comparing raw mole numbers without dividing by coefficients is the classic blunder. Once you know the limiting reagent, every product quantity comes from it, and the leftover amount of the excess reagent is its initial moles minus what actually reacted. In industrial and lab contexts you will also be asked for percent yield, which is the actual yield divided by the theoretical yield, times a hundred."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Concentration terms — and which one survives a temperature change",
+      "content": {
+        "bullets": [
+          "Molarity M = moles of solute / volume of solution in litres — temperature dependent, because volume expands.",
+          "Molality m = moles of solute / mass of solvent in kg — temperature independent, hence preferred in colligative properties.",
+          "Mole fraction χ = moles of component / total moles; also temperature independent; Σχ = 1.",
+          "Normality N = gram equivalents / volume in litres; N = n-factor × M.",
+          "Mass percent, ppm for trace solutes; % w/v used in biology and pharmacy contexts."
+        ],
+        "latexFormulas": [
+          "M=\\frac{n_{solute}}{V_{solution}\\ (L)},\\qquad m=\\frac{n_{solute}}{mass_{solvent}\\ (kg)}",
+          "\\chi_i=\\frac{n_i}{\\sum n},\\quad \\sum\\chi_i=1,\\qquad N=\\text{n-factor}\\times M",
+          "\\text{Dilution: }M_1V_1=M_2V_2,\\qquad \\text{Mixing: }M=\\frac{M_1V_1+M_2V_2}{V_1+V_2}"
+        ],
+        "keyTakeaway": "Molarity changes with temperature, molality and mole fraction do not — memorise why."
+      },
+      "voiceScript": "Concentration terms are pure definition work, so they are free marks if you are precise. Molarity is moles of solute per litre of solution. Notice it is solution, not solvent, and notice it involves volume, which expands on heating. So molarity is temperature dependent. Molality is moles of solute per kilogram of solvent, uses mass, and is therefore temperature independent. That is exactly why colligative properties are expressed in molality. Mole fraction is the moles of a component over total moles, always sums to one, and is also temperature independent. Normality uses gram equivalents, and equals the n factor times molarity, where the n factor is the acidity, basicity or the total change in oxidation number. Two operations you will use constantly: dilution, where M one V one equals M two V two, and mixing two solutions of the same solute, where the final molarity is the mole-weighted average."
+    },
+    {
+      "slideNumber": 5,
+      "title": "Empirical and molecular formula from percentage composition",
+      "content": {
+        "bullets": [
+          "Step 1: convert each percentage to grams (assume a 100 g sample).",
+          "Step 2: divide each by its atomic mass to get moles of each element.",
+          "Step 3: divide all by the smallest mole value to get a simple ratio.",
+          "Step 4: if a ratio is not a whole number, multiply all by the smallest integer that clears it (0.5 → ×2, 0.33 → ×3).",
+          "Step 5: molecular formula = (empirical formula) × n, where n = molecular mass / empirical formula mass."
+        ],
+        "latexFormulas": [
+          "\\text{Empirical: }\\frac{\\%}{\\text{atomic mass}}\\to\\text{divide by smallest}\\to\\text{simplest whole ratio}",
+          "n=\\frac{\\text{Molecular mass}}{\\text{Empirical formula mass}},\\qquad \\text{MF}=(\\text{EF})_n"
+        ],
+        "keyTakeaway": "Never round 1.5 down to 1 — multiply the whole set instead."
+      },
+      "voiceScript": "Finding a formula from percentage composition is a five step recipe, and examiners set it because it punishes sloppiness. Assume a hundred gram sample, so the percentages become grams directly. Divide each by that element's atomic mass to get moles. Divide every mole value by the smallest one among them, giving a simple ratio. Now the crucial judgement: if a ratio comes out as one point five or one point three three, do not round it. Multiply the entire set by two or three so that all become whole numbers. That gives the empirical formula. To get the molecular formula you need the molar mass, which often comes from vapour density: molar mass equals two times vapour density. Divide the molar mass by the empirical formula mass to get n, and the molecular formula is the empirical formula taken n times."
+    },
+    {
+      "slideNumber": 6,
+      "title": "Eudiometry, and the traps that decide JEE Main accuracy",
+      "content": {
+        "bullets": [
+          "For gases, volume ratios at the same T and P equal mole ratios (Avogadro's law) — so you can work entirely in mL.",
+          "KOH solution absorbs CO₂; alkaline pyrogallol absorbs O₂; white phosphorus absorbs O₂ — used in eudiometry to find composition by contraction.",
+          "In combustion eudiometry, contract the equation for water: at room temperature H₂O is liquid, so its volume is not counted as gas.",
+          "Traps: coefficients read as mass ratios; using 22.4 L at non-STP conditions; forgetting that molarity uses solution volume; ignoring the n-factor when converting normality; rounding a 1.33 ratio to 1."
+        ],
+        "latexFormulas": [
+          "\\frac{V_1}{V_2}=\\frac{n_1}{n_2}\\ (\\text{same }T,P)\\qquad \\text{(Avogadro's law)}",
+          "C_xH_y+\\left(x+\\frac y4\\right)O_2\\to xCO_2+\\frac y2H_2O\\ (l)"
+        ],
+        "keyTakeaway": "For gas reactions, work in volumes — they are moles in disguise."
+      },
+      "voiceScript": "Eudiometry is the gas volume version of stoichiometry and it appears in JEE Main regularly. The enabling idea is Avogadro's law: at the same temperature and pressure, equal volumes contain equal numbers of moles, so volume ratios are mole ratios and you can solve the whole problem in millilitres. In a combustion eudiometry, write the hydrocarbon burning with x plus y by four moles of oxygen to give x moles of carbon dioxide and y by two moles of water. Then the subtle part: if the experiment is at room temperature, water is a liquid, so it contributes no gas volume, and the observed contraction includes it. Absorbents identify the products: potassium hydroxide absorbs carbon dioxide, alkaline pyrogallol absorbs oxygen. To close, the trap list: coefficients are mole ratios not mass ratios, twenty two point four litres is only for standard conditions, molarity uses solution volume not solvent, normality needs the n factor, and never round a one point three three ratio down to one."
+    }
+  ]
+}

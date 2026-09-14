@@ -1,0 +1,146 @@
+{
+  "id": "chem-chemical-equilibrium",
+  "mode": "LECTURE",
+  "subject": "Chemistry",
+  "topic": "Chemical & Ionic Equilibrium",
+  "targetExam": "NEET",
+  "tagline": "Kc, Kp, Le Chatelier, pH, buffers and solubility — the most predictable numerical chapter in NEET chemistry.",
+  "tags": ["physical chemistry", "numerical", "NCERT-direct", "buffers"],
+  "prerequisites": ["Mole concept", "Logarithms basics"],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "What equilibrium actually is (and is not)",
+      "content": {
+        "bullets": [
+          "Equilibrium is dynamic: forward and backward rates are equal, so concentrations stop changing while reactions continue.",
+          "It is attainable from either side, and the final state is identical — that is why K has one value at a given temperature.",
+          "K depends only on temperature. Concentration, pressure, volume and catalysts change the time to reach equilibrium, never K.",
+          "Pure solids and pure liquids are excluded from the expression because their concentrations are constant."
+        ],
+        "latexFormulas": [
+          "aA+bB\\rightleftharpoons cC+dD:\\quad K_c=\\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+          "\\text{rate}_{forward}=\\text{rate}_{backward}\\ \\text{at equilibrium}"
+        ],
+        "keyTakeaway": "Only temperature changes K — every other disturbance changes only the position, not the constant."
+      },
+      "voiceScript": "Let us be precise about what equilibrium means, because NEET asks exactly this. At equilibrium the reaction has not stopped. The forward and backward rates are equal, so the concentrations become constant while molecules keep reacting in both directions. That is why we call it dynamic equilibrium. Two consequences matter. First, equilibrium can be approached from either side, and you reach the same final state, so there is one value of the equilibrium constant at a given temperature. Second, the constant K depends only on temperature. Changing concentration, pressure, volume, or adding a catalyst shifts the position or the time taken, but K itself stays put. And when you write the expression, pure solids and pure liquids are left out because their concentrations do not change."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Kc, Kp and the ICE table routine",
+      "content": {
+        "bullets": [
+          "Kp uses partial pressures in bar or atm; Kc uses molar concentrations. They connect through Δng, the change in gaseous moles.",
+          "If Δng = 0 then Kp = Kc. If Δng > 0 then Kp > Kc.",
+          "ICE table: write Initial moles/concentrations, the Change using stoichiometric ratios, then the Equilibrium row.",
+          "For a dissociation with degree α and small α, approximations like (1 − α) ≈ 1 turn a cubic into a square root."
+        ],
+        "latexFormulas": [
+          "K_p=K_c(RT)^{\\Delta n_g},\\qquad \\Delta n_g=n_{products}-n_{reactants}\\ (\\text{gases only})",
+          "\\text{PCl}_5\\rightleftharpoons\\text{PCl}_3+\\text{Cl}_2:\\quad K_c=\\frac{C\\alpha^2}{1-\\alpha}",
+          "\\alpha\\ll1\\Rightarrow K_c\\approx C\\alpha^2\\Rightarrow \\alpha=\\sqrt{K_c/C}"
+        ],
+        "keyTakeaway": "Write the ICE table with moles first, then divide by volume at the end — it avoids half the algebra errors."
+      },
+      "voiceScript": "Now the machinery. K c uses concentrations and K p uses partial pressures, and they are related by K p equals K c times R T raised to delta n g, where delta n g counts only gaseous moles, products minus reactants. If delta n g is zero, the two constants are equal. For numericals, adopt one routine and never change it: the ICE table. Write the initial amounts, then the change row using the stoichiometric coefficients, so if x moles of the reactant disappear, the coefficients tell you exactly how much of each product appears. Then the equilibrium row is just the sum. A very useful shortcut for dissociation problems: if the degree of dissociation alpha is small, typically under five percent, you can approximate one minus alpha as one, and the equilibrium constant becomes C times alpha squared, giving alpha as root K c over C. NEET rewards this approximation heavily, but do check that alpha really is small afterwards."
+    },
+    {
+      "slideNumber": 3,
+      "title": "Q versus K — predicting the direction",
+      "content": {
+        "bullets": [
+          "Q is the same expression as K but evaluated at any instant, not necessarily at equilibrium.",
+          "Q < K → net forward reaction. Q = K → at equilibrium. Q > K → net backward reaction.",
+          "This single comparison answers 'which way will the system shift' in every NCERT-style question.",
+          "Adding an inert gas at constant volume changes total pressure but no partial pressure → no shift."
+        ],
+        "latexFormulas": [
+          "Q_c=\\frac{[C]^c[D]^d}{[A]^a[B]^b}\\Bigg|_{\\text{any instant}}",
+          "Q<K\\Rightarrow\\text{forward},\\quad Q=K\\Rightarrow\\text{equilibrium},\\quad Q>K\\Rightarrow\\text{backward}"
+        ],
+        "keyTakeaway": "Direction questions are one comparison: Q against K. Nothing else."
+      },
+      "voiceScript": "If you remember one idea from this chapter for NEET, make it this one. The reaction quotient Q is the identical expression to K, but you plug in the concentrations at whatever instant you are given, whether or not the system is at equilibrium. Now compare. If Q is less than K, the numerator, the products, are too small, so the reaction runs forward. If Q is greater than K, it runs backward. If Q equals K, the system is already at equilibrium and nothing changes. Every question asking which way will the reaction shift is this single comparison in disguise. And one sneaky case: adding an inert gas at constant volume raises the total pressure but leaves every partial pressure unchanged, so there is no shift at all."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Le Chatelier's principle, with the exceptions that NEET loves",
+      "content": {
+        "bullets": [
+          "Concentration: add reactant → shifts forward (K unchanged). Remove product → shifts forward.",
+          "Pressure/volume: increase pressure (decrease volume) → shifts toward fewer gaseous moles.",
+          "Temperature: this is the only change that alters K. For an exothermic reaction, heating shifts backward and lowers K.",
+          "Catalyst: speeds both directions equally → no shift, equilibrium reached faster.",
+          "Inert gas at constant pressure → volume increases → shifts toward more gaseous moles."
+        ],
+        "latexFormulas": [
+          "\\Delta H<0\\ (\\text{exothermic}):\\ T\\uparrow\\Rightarrow K\\downarrow,\\ \\text{shift backward}",
+          "\\Delta H>0\\ (\\text{endothermic}):\\ T\\uparrow\\Rightarrow K\\uparrow,\\ \\text{shift forward}",
+          "\\ln\\frac{K_2}{K_1}=-\\frac{\\Delta H}{R}\\left(\\frac{1}{T_2}-\\frac{1}{T_1}\\right)"
+        ],
+        "keyTakeaway": "Treat heat as a reactant or product: exothermic means heat is on the product side."
+      },
+      "voiceScript": "Le Chatelier's principle says a system at equilibrium responds to a stress by partially opposing it. Use it carefully. Add a reactant and the system shifts forward to consume some of it, but K stays the same. Increase the pressure, or equivalently decrease the volume, and it shifts toward the side with fewer gaseous moles. Temperature is the special one, because it is the only disturbance that changes K itself. The clean trick is to treat heat as a chemical species: for an exothermic reaction, heat sits on the product side, so heating pushes the reaction backward and K falls. For an endothermic reaction, heat is a reactant, so heating pushes it forward and K rises. A catalyst changes nothing about the position, it only shortens the time. And the subtle one students lose marks on: adding an inert gas at constant pressure increases the volume, so the system shifts toward more gaseous moles."
+    },
+    {
+      "slideNumber": 5,
+      "title": "Ionic equilibrium — pH, Kw and the three acid/base types",
+      "content": {
+        "bullets": [
+          "Water auto-ionises: [H+][OH−] = 10⁻¹⁴ at 25 °C, so pH + pOH = 14 always, in any aqueous solution.",
+          "Strong acid/base: take concentration directly (multiply by the number of ionisable H⁺ or OH⁻).",
+          "Weak acid: only a fraction dissociates, so [H⁺] = √(Ka·C) and α = √(Ka/C).",
+          "Salt hydrolysis decides the pH of a salt solution: weak acid + strong base → basic; strong acid + weak base → acidic; weak + weak → compare Ka and Kb.",
+          "Dilution: strong acid pH rises by 1 per tenfold dilution; weak acid rises by only 0.5 because more dissociates."
+        ],
+        "latexFormulas": [
+          "\\mathrm{pH}=-\\log[H^+],\\quad \\mathrm{pOH}=-\\log[OH^-],\\quad K_w=[H^+][OH^-]=10^{-14}",
+          "\\text{weak acid: }[H^+]=\\sqrt{K_aC},\\qquad \\alpha=\\sqrt{\\frac{K_a}{C}}",
+          "\\text{weak acid + strong base salt: }[H^+]=\\sqrt{\\frac{K_wK_a}{C}}",
+          "\\text{weak base + strong acid salt: }[H^+]=\\sqrt{\\frac{K_wC}{K_b}}"
+        ],
+        "keyTakeaway": "Identify the species first — strong, weak, or salt — and the formula chooses itself."
+      },
+      "voiceScript": "Moving to ionic equilibrium, which is where NEET packs most of its numericals. Start from water: the ionic product, hydrogen ion times hydroxide ion, is ten to the minus fourteen at twenty five degrees Celsius, so pH plus pOH is fourteen in every aqueous solution, acidic or basic. Now classify before you calculate. For a strong acid, the hydrogen ion concentration is the molarity times the number of ionisable protons, so sulphuric acid gives twice its molarity. For a weak acid, only a fraction dissociates, and the hydrogen ion concentration is root K a times C. For a salt, you must ask which parent was weak: a salt of a weak acid and a strong base hydrolyses to give a basic solution, and the hydrogen ion concentration is root K w times K a divided by C. One more trap: on tenfold dilution a strong acid's pH rises by exactly one, but a weak acid's rises by only about half, because dilution increases the degree of dissociation."
+    },
+    {
+      "slideNumber": 6,
+      "title": "Buffers, Henderson–Hasselbalch and the common-ion effect",
+      "content": {
+        "bullets": [
+          "Acidic buffer = weak acid + its salt with a strong base (CH₃COOH + CH₃COONa); basic buffer = weak base + its salt (NH₄OH + NH₄Cl).",
+          "Buffer action: added H⁺ is mopped up by the conjugate base, added OH⁻ by the weak acid — pH barely moves.",
+          "Buffer capacity is greatest when pH = pKa, i.e. salt and acid concentrations are equal.",
+          "Common-ion effect: adding a common ion suppresses dissociation — used in qualitative analysis and in precipitation control.",
+          "Blood buffer (H₂CO₃/HCO₃⁻) and the solubility product are NCERT favourites."
+        ],
+        "latexFormulas": [
+          "\\mathrm{pH}=\\mathrm{p}K_a+\\log\\frac{[\\text{salt}]}{[\\text{acid}]}",
+          "\\mathrm{pOH}=\\mathrm{p}K_b+\\log\\frac{[\\text{salt}]}{[\\text{base}]}",
+          "K_{sp}=[A^{n+}]^a[B^{m-}]^b,\\qquad \\text{precipitation if }Q_{sp}>K_{sp}"
+        ],
+        "keyTakeaway": "Diluting a buffer does not change its pH — the salt/acid ratio stays the same."
+      },
+      "voiceScript": "Buffers are a guaranteed NEET question. An acidic buffer is a weak acid mixed with its own salt with a strong base, like acetic acid with sodium acetate. A basic buffer is a weak base with its salt, like ammonium hydroxide with ammonium chloride. The mechanism is simple: if you add acid, the conjugate base in the buffer consumes it; if you add base, the weak acid consumes it, so the pH barely moves. The Henderson Hasselbalch equation gives the pH as p K a plus log of salt concentration over acid concentration. Buffer capacity is maximum when the two concentrations are equal, which means pH equals p K a. One beautiful trap: diluting a buffer does not change its pH, because the ratio of salt to acid stays the same even though both concentrations fall. The related idea is the common ion effect, where adding an ion already present suppresses dissociation, and that same logic governs precipitation through the solubility product."
+    },
+    {
+      "slideNumber": 7,
+      "title": "Solubility product, and the seven traps in this chapter",
+      "content": {
+        "bullets": [
+          "Ksp = product of ion concentrations at saturation, each raised to its stoichiometric coefficient; solubility s converts to Ksp by the formula of the salt.",
+          "For AB type: Ksp = s². For AB₂: Ksp = 4s³. For A₃B: Ksp = 27s³.",
+          "Precipitation occurs when the ionic product Qsp exceeds Ksp.",
+          "Trap list: forgetting to exclude solids from K; writing Kp with Δng including aqueous species; assuming a catalyst shifts equilibrium; taking pH = −log C for a weak acid; ignoring the second ionisable proton of H₂SO₄; assuming buffer pH changes on dilution; using the small-α approximation when α is large."
+        ],
+        "latexFormulas": [
+          "AB:\\ K_{sp}=s^2,\\quad AB_2:\\ K_{sp}=4s^3,\\quad A_2B:\\ K_{sp}=4s^3,\\quad A_3B:\\ K_{sp}=27s^4",
+          "S=\\sqrt{K_{sp}}\\ (1:1),\\qquad S=\\left(\\frac{K_{sp}}{4}\\right)^{1/3}\\ (1:2)"
+        ],
+        "keyTakeaway": "Convert solubility to Ksp using the salt's formula, then reverse the step to get solubility back."
+      },
+      "voiceScript": "We finish with the solubility product and a trap audit. K s p is the product of the ion concentrations in a saturated solution, each raised to its coefficient. The conversion to solubility s depends entirely on the type of salt: for a one to one salt like silver chloride, K s p equals s squared; for one to two like calcium fluoride, K s p equals four s cubed; for three to one, twenty seven s to the fourth. Precipitation happens when the ionic product exceeds K s p. Now the traps I want you to write in the margin. Do not include pure solids in the K expression. Count only gaseous moles in delta n g, never aqueous species. A catalyst never shifts equilibrium. Never use pH equals minus log C for a weak acid, use root K a C. For sulphuric acid remember both ionisable protons. Buffer pH does not change on dilution. And check the small alpha approximation is valid before you use it. Fix these seven and this chapter becomes a free twenty marks in the NEET paper."
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "id": "phy-laws-of-motion-fbd",
+  "mode": "LECTURE",
+  "subject": "Physics",
+  "topic": "Laws of Motion — Free Body Diagrams, Friction & Constraints",
+  "targetExam": "JEE Advanced",
+  "tagline": "The single skill that decides mechanics in Advanced: draw one body, list real forces, write the constraint.",
+  "tags": ["mechanics", "FBD", "friction", "constraints", "multi-concept"],
+  "prerequisites": ["Kinematics — Motion in 1D & 2D", "Vector resolution"],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "Newton's laws are a statement about frames, not about force names",
+      "content": {
+        "bullets": [
+          "First law defines inertial frames: frames where a force-free body keeps constant velocity.",
+          "Second law is the working equation — net external force on a body equals rate of change of its momentum.",
+          "Third law pairs act on two different bodies, so they never cancel within one free body diagram.",
+          "In a non-inertial frame the second law survives only if you add a pseudo force −ma_frame."
+        ],
+        "latexFormulas": [
+          "\\vec F_{net}=\\frac{d\\vec p}{dt}=m\\vec a\\quad (m\\ \\text{constant})",
+          "\\vec F_{AB}=-\\vec F_{BA}",
+          "\\vec F_{pseudo}=-m\\vec a_{frame}"
+        ],
+        "keyTakeaway": "Third-law pairs never appear in the same FBD — that is the most common conceptual slip."
+      },
+      "voiceScript": "Advanced mechanics begins with being honest about frames. The first law is not a special case of the second, it is the law that defines inertial frames, the frames in which the second law is even valid. The second law is the equation you will actually use: net external force equals d p by d t, which becomes m a when mass is constant. The third law gives you pairs, but remember, the two forces of a pair act on two different bodies. That is precisely why they never cancel inside a single free body diagram, and students who cancel them lose marks every year. Finally, if you choose an accelerating frame, you must pay a tax: add a pseudo force equal to minus mass times the acceleration of the frame."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Drawing an FBD that never lies to you",
+      "content": {
+        "bullets": [
+          "Isolate ONE body. If the problem has two blocks and a string, you need three diagrams (block A, block B, and the constraint).",
+          "Add only forces applied BY other objects: weight (earth), normal (surface), friction (surface), tension (string), spring force (spring).",
+          "Never draw 'centripetal force', 'force of motion', or a force in the direction of velocity just because it is moving.",
+          "Choose axes along and perpendicular to the acceleration — not automatically horizontal and vertical."
+        ],
+        "latexFormulas": [
+          "\\sum F_{\\parallel}=ma_{\\parallel},\\qquad \\sum F_{\\perp}=ma_{\\perp}\\;(=0\\ \\text{if no motion}\\perp)",
+          "\\text{Incline: } mg\\sin\\theta\\ \\text{along plane},\\quad mg\\cos\\theta\\ \\text{into plane},\\quad N=mg\\cos\\theta"
+        ],
+        "keyTakeaway": "Arrows on an FBD must each name a source object; if you cannot, the arrow does not belong there."
+      },
+      "voiceScript": "Here is the discipline that decides Advanced mechanics. One body per diagram. If the system has two blocks joined by a string, you draw three things: block A, block B, and the constraint equation that links their accelerations. On each body put only the forces other objects apply to it. Weight from the earth, normal reaction and friction from the surface in contact, tension from the string, spring force from the spring. Every arrow must be able to name its source. If you cannot name the source, that arrow is imaginary. And do not draw a force along the direction of motion just because the body is moving, motion is not a force. Last habit: choose your axes along and perpendicular to the acceleration, especially on inclines, because that makes one of your two equations trivially zero."
+    },
+    {
+      "slideNumber": 3,
+      "title": "Friction — a self-adjusting force with a ceiling",
+      "content": {
+        "bullets": [
+          "Static friction matches the applied tangential force exactly, up to its limiting value μs N.",
+          "Kinetic friction is roughly constant at μk N, and μk < μs — that is why jerking a heavy box feels easier once it slides.",
+          "Friction opposes relative motion (or its tendency) between the two surfaces, not the motion of the body.",
+          "Angle of friction λ satisfies tan λ = μ; angle of repose equals λ for a block on an incline."
+        ],
+        "latexFormulas": [
+          "f_s\\le\\mu_s N,\\qquad f_{s,\\max}=\\mu_s N,\\qquad f_k=\\mu_k N",
+          "\\tan\\lambda=\\mu_s,\\qquad \\theta_{repose}=\\lambda",
+          "\\text{Block on rough incline: } a=g(\\sin\\theta-\\mu_k\\cos\\theta)"
+        ],
+        "keyTakeaway": "Test before you write f = μN: is the body sliding, or merely on the verge of sliding?"
+      },
+      "voiceScript": "Friction is the force students get wrong by formula, not by concept. Static friction is self adjusting. It supplies exactly as much as needed to prevent relative motion, up to a ceiling of mu s times N. So if you push a heavy box with twenty newtons and it does not move, friction is twenty newtons, not mu s N. Only at the verge of sliding, the limiting case, does friction equal mu s N. Once sliding starts, kinetic friction takes over, is nearly constant, and is slightly smaller, which is why the breakaway feels sudden. Direction rule: friction opposes relative motion, or the tendency of relative motion, between the two surfaces in contact. That is why friction on a car's driven wheels points forward and actually accelerates the car. And a neat result for inclines: the angle at which a block just starts to slide, the angle of repose, satisfies tan of that angle equals mu."
+    },
+    {
+      "slideNumber": 4,
+      "title": "Constraints — string, wedge and contact",
+      "content": {
+        "bullets": [
+          "Inextensible string: the component of velocity of both ends along the string is equal (string constraint).",
+          "Pulley systems: if the string length is constant, differentiate twice to relate accelerations.",
+          "Wedge–block: the block's acceleration normal to the wedge surface equals the wedge's acceleration component along that same normal.",
+          "Contact constraint: two bodies in contact have equal normal components of acceleration while they remain in contact."
+        ],
+        "latexFormulas": [
+          "L=x_1+x_2+\\text{const}\\Rightarrow a_1=-a_2",
+          "\\text{Movable pulley: } a_{\\text{block}}=2a_{\\text{pulley}},\\ T_{\\text{string}}=2T_{\\text{pull}}",
+          "\\vec a_{B}\\cdot\\hat n=\\vec a_{A}\\cdot\\hat n\\quad(\\text{contact / wedge})"
+        ],
+        "keyTakeaway": "Write the constraint before Newton's second law — it decides how many unknowns you actually have."
+      },
+      "voiceScript": "This slide is what separates Advanced from Main. Constraints. An inextensible string means the velocity components of its two ends along the string are equal at every instant. For pulley systems the clean method is to write the total string length as constant, then differentiate twice with respect to time to relate accelerations. Remember the movable pulley trade: the block accelerates twice as fast as the pulley, and the tension in the string is half the pull on the pulley. For a block on a moving wedge, use the normal direction: the component of the block's acceleration perpendicular to the inclined surface must equal the corresponding component of the wedge's acceleration, otherwise they either separate or interpenetrate. Always write the constraint first, because it tells you how many independent unknowns you really have."
+    },
+    {
+      "slideNumber": 5,
+      "title": "Pseudo force and non-inertial frames, done cleanly",
+      "content": {
+        "bullets": [
+          "Two valid routes: solve in the ground frame (no pseudo force) or in the accelerating frame (with pseudo force). Both give identical answers.",
+          "Pseudo force acts on every mass in the frame, proportional to that mass, opposite to the frame's acceleration.",
+          "Lift problems: apparent weight is N = m(g ± a); free fall gives zero apparent weight.",
+          "Rotating frames need two pseudo forces — centrifugal and Coriolis — usually out of JEE syllabus scope."
+        ],
+        "latexFormulas": [
+          "\\vec F_{pseudo}=-m\\vec a_{frame}",
+          "\\text{Lift up: }N=m(g+a),\\qquad \\text{Lift down: }N=m(g-a),\\qquad a=g\\Rightarrow N=0",
+          "\\text{Car accelerating }a:\\ \\text{pendulum }\\tan\\theta=\\frac{a}{g},\\ T=m\\sqrt{g^2+a^2}"
+        ],
+        "keyTakeaway": "Pseudo force is bookkeeping for a moving frame — it has no reaction pair."
+      },
+      "voiceScript": "Pseudo force is not a real force, it is an accounting correction, and it has no third law partner. You have two legitimate routes for any accelerating frame problem. Solve everything from the ground, an inertial frame, and use no pseudo force at all. Or sit inside the accelerating frame and add minus m times a of the frame on every mass. Both must give the same answer, and if they do not, your constraint is wrong. The lift is the classic: apparent weight is the normal reaction, m times g plus a when the lift accelerates upward, m times g minus a when downward, and zero in free fall, which is the weightlessness astronauts feel. Another quick one: a pendulum in an accelerating car makes an angle with the vertical whose tangent is a over g, and the tension is m times root g squared plus a squared."
+    },
+    {
+      "slideNumber": 6,
+      "title": "Circular dynamics & vertical circles",
+      "content": {
+        "bullets": [
+          "Centripetal force is a role, not a new force: the net radial force from tension, friction, normal or gravity plays it.",
+          "Tangential force changes speed, radial force changes direction — resolve, then write two equations.",
+          "Vertical circle with a string: tension is highest at the bottom, lowest at the top, and the minimum speeds are fixed by energy.",
+          "On a banked road, the horizontal component of the normal reaction supplies the centripetal force without needing friction."
+        ],
+        "latexFormulas": [
+          "\\sum F_{radial}=\\frac{mv^2}{r}=m\\omega^2 r,\\qquad \\sum F_{tangential}=m\\frac{dv}{dt}",
+          "v_{top}^{min}=\\sqrt{gr},\\quad v_{bottom}^{min}=\\sqrt{5gr},\\quad T_{bottom}-T_{top}=6mg",
+          "\\text{Banking: }\\tan\\theta=\\frac{v^2}{rg}"
+        ],
+        "keyTakeaway": "Never add a centripetal arrow to an FBD — collect the radial components of the real forces instead."
+      },
+      "voiceScript": "Circular dynamics in Advanced is a resolution problem. Split the forces into radial and tangential. The radial net force supplies m v squared over r and changes direction only. The tangential net force changes the speed. In a vertical circle with a string, the numbers you must own are these: the minimum speed at the top is root g r, because there the tension can drop to zero and gravity alone supplies the centripetal requirement. The minimum speed at the bottom is root five g r, obtained from energy conservation between the two points. And the difference between the maximum and minimum tension in the string is six m g. For a banked road, the horizontal component of the normal reaction provides the required centripetal force, and tan theta equals v squared over r g, which is why banking reduces the wear on tyres."
+    },
+    {
+      "slideNumber": 7,
+      "title": "The Advanced workflow, with a worked skeleton",
+      "content": {
+        "bullets": [
+          "Order of attack: identify bodies → write constraints → draw one FBD per body → choose axes → write ΣF = ma per body → solve the linear system.",
+          "Count your unknowns (tensions, normals, accelerations, friction) and count your equations. If they do not match, you are missing a constraint.",
+          "Friction unknown? Assume no slipping first, solve, then verify f ≤ μs N. If it fails, switch to f = μk N with relative motion.",
+          "Sanity checks: units, limiting cases (μ → 0, θ → 0, m → ∞), and whether the sign of acceleration matches your convention."
+        ],
+        "latexFormulas": [
+          "\\text{Two blocks, one string: }\\ a=\\frac{m_2g-\\mu m_1 g}{m_1+m_2},\\quad T=m_1a+\\mu m_1 g",
+          "\\text{System shortcut: } a=\\frac{\\sum F_{\\text{driving}}-\\sum F_{\\text{opposing}}}{\\sum m}"
+        ],
+        "keyTakeaway": "Equations minus unknowns = 0 is the test that your mechanics setup is complete."
+      },
+      "voiceScript": "Let us package this into a workflow you can run under exam pressure. Step one, identify the bodies. Step two, write the constraints, string or wedge or contact. Step three, one free body diagram per body, arrows with named sources. Step four, choose axes along the acceleration. Step five, write sigma F equals m a for each body and each axis. Step six, solve the resulting linear system. Then the professional habit: count unknowns and count equations. If they do not match, you are missing a constraint, not missing a formula. When friction is unknown, assume no slipping, solve for the required friction, and only then verify that it is within mu s N. If it exceeds, redo with kinetic friction and relative motion. Finally test your answer with limiting cases: mu tending to zero, theta tending to zero, one mass becoming very large. A formula that survives those checks is almost never wrong."
+    }
+  ]
+}
