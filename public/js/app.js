@@ -32,7 +32,26 @@ const settings = {
   handsFree: false,
   langHint: true,
   apiKey: '',
+  // local model (Qwen via Ollama / LM Studio / llama.cpp / vLLM)
+  provider: '',
+  baseUrl: '',
+  model: '',
+  direct: false, // browser talks to the local model directly
+  // local audio
+  preferLocalAudio: false,
+  localTts: null, // {provider, voice} from /api/audio/status
+  localVoice: '',
 };
+
+/** Provider fields sent with every request so the server can relay to a local model. */
+function providerConfig() {
+  const cfg = {};
+  if (settings.provider) cfg.provider = settings.provider;
+  if (settings.baseUrl) cfg.baseUrl = settings.baseUrl;
+  if (settings.model) cfg.model = settings.model;
+  if (settings.apiKey) cfg.apiKey = settings.apiKey;
+  return cfg;
+}
 
 const tts = new window.AstraTTS();
 const stt = new window.AstraSTT();
@@ -72,8 +91,19 @@ function toast(message) {
 async function api(path, options = {}) {
   const headers = { 'content-type': 'application/json', ...(options.headers || {}) };
   if (settings.apiKey) headers['x-astra-key'] = settings.apiKey;
+  if (settings.provider) headers['x-astra-provider'] = settings.provider;
+  if (settings.baseUrl) headers['x-astra-base-url'] = settings.baseUrl;
+  if (settings.model) headers['x-astra-model'] = settings.model;
   const res = await fetch(path, { ...options, headers });
-  if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+  if (!res.ok) {
+    let detail = '';
+    try {
+      detail = (await res.json()).error || '';
+    } catch {
+      /* non-JSON error body */
+    }
+    throw new Error(detail || `${res.status} ${res.statusText}`);
+  }
   return res.json();
 }
 
@@ -217,8 +247,55 @@ function maybeHandsFree() {
 
 async function speak(text) {
   if (!text) return;
+  if (settings.preferLocalAudio && settings.localTts?.local) {
+    const played = await speakLocal(text);
+    if (played) return;
+  }
   applyTtsSettings();
   await tts.speak(text);
+}
+
+/**
+ * Synthesise on a LOCAL engine (Piper / espeak-ng) via the server and play the
+ * WAV. Returns false when no local engine answered, so the caller falls back to
+ * the browser voice.
+ */
+async function speakLocal(text) {
+  try {
+    const res = await fetch('/api/audio/tts', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ text, voice: settings.localVoice || undefined }),
+    });
+    if (!res.ok) return false;
+    const type = res.headers.get('content-type') || '';
+    if (!type.startsWith('audio/')) {
+      const info = await res.json();
+      settings.localTts = info.status || settings.localTts;
+      if (info.status && !info.status.local) {
+        settings.preferLocalAudio = false;
+        toast(`No local voice available — using the browser voice. (${info.status.reason || 'see Voice setup'})`);
+      }
+      return false;
+    }
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const player = new Audio(url);
+    player.playbackRate = settings.rate;
+    await new Promise((resolve, reject) => {
+      player.onended = resolve;
+      player.onerror = reject;
+      player.play().catch(reject);
+    });
+    state.stats.spoken += 1;
+    updateSessionStats();
+    URL.revokeObjectURL(url);
+    maybeAutoAdvance();
+    maybeHandsFree();
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /* ------------------------------------------------------------------ *
@@ -396,6 +473,7 @@ function pushAstraMessage(json) {
   actions.appendChild(btnSpeak);
   actions.appendChild(btnCopy);
   if (json.engine) actions.appendChild(el('span', 'pill', `<span class="dot"></span>${escapeHtml(json.engine)}`));
+  if (json.model) actions.appendChild(el('span', 'pill', `<span class="dot"></span>${escapeHtml(json.model)}`));
   bubble.appendChild(actions);
 
   wrap.appendChild(bubble);
@@ -516,7 +594,7 @@ function paintQuickChips() {
 function setView(name) {
   state.view = name;
   $$('.view').forEach((v) => v.classList.remove('active'));
-  const map = { home: 'view-home', lecture: 'view-lecture', chat: 'view-chat', api: 'view-api' };
+  const map = { home: 'view-home', lecture: 'view-lecture', chat: 'view-chat', create: 'view-create', api: 'view-api' };
   $(`#${map[name]}`)?.classList.add('active');
   $$('.nav-btn').forEach((b) => b.classList.toggle('active', b.dataset.view === name));
   $('#filterCard').style.display = name === 'lecture' ? 'none' : '';
@@ -591,8 +669,40 @@ function openModal() {
   $('#optLangHint').checked = settings.langHint;
   $('#apiKey').value = settings.apiKey;
   $('#btnAutoSpeak').classList.toggle('on', settings.autoSpeak);
+
+  // local model
+  $('#providerSelect').value = settings.provider || 'none';
+  $('#baseUrlInput').value = settings.baseUrl || '';
+  $('#modelInput').value = settings.model || '';
+  $('#optDirect').checked = !!settings.direct;
+  applyProviderPlaceholder();
+
+  // local audio
+  $('#optLocalAudio').checked = !!settings.preferLocalAudio;
+  const voiceSel = $('#localVoiceSelect');
+  const voices = settings.localTts?.voices || [];
+  voiceSel.innerHTML = voices.length
+    ? voices.map((v) => `<option value="${escapeHtml(v)}"${v === settings.localVoice ? ' selected' : ''}>${escapeHtml(v)}</option>`).join('')
+    : '<option value="">no local voice installed</option>';
+  $('#localAudioInfo').textContent = settings.localTts
+    ? `${settings.localTts.provider}${settings.localTts.voice ? ` · ${settings.localTts.voice}` : ''} — ${settings.localTts.reason || 'ready'}`
+    : 'checking local audio engines…';
+
   populateVoiceSelect();
   $('#voiceModal').classList.add('open');
+}
+
+function applyProviderPlaceholder() {
+  const known = {
+    '': '',
+    ollama: 'http://127.0.0.1:11434',
+    lmstudio: 'http://127.0.0.1:1234/v1',
+    llamacpp: 'http://127.0.0.1:8080/v1',
+    vllm: 'http://127.0.0.1:8000/v1',
+    'openai-compatible': 'http://127.0.0.1:8000/v1',
+    openai: 'https://api.openai.com/v1',
+  };
+  $('#baseUrlInput').placeholder = known[$('#providerSelect').value] || 'http://127.0.0.1:11434';
 }
 
 function closeModal() {
@@ -610,13 +720,9 @@ async function boot() {
   updateSessionStats();
   updateVoicePill();
 
-  // Health / engine pill
+  // Health / engine pill / local audio detection
   try {
-    const health = await api('/api/health');
-    $('#engineLabel').textContent = health.engine === 'live-model' ? 'live model connected' : `offline engine · ${health.doubtRules} rules`;
-    $('#stRules').textContent = health.doubtRules;
-    $('#stDecks').textContent = health.lectures;
-    $('#kpiRules').textContent = health.doubtRules;
+    await refreshStatus();
   } catch {
     $('#engineLabel').textContent = 'server unreachable';
     $('#enginePill').classList.add('is-off');
@@ -711,6 +817,13 @@ async function boot() {
     $('#doubtInput').focus();
   });
 
+  $('#btnPractice').addEventListener('click', () => {
+    if (!settings.provider) {
+      toast('Connect a local model first (Voice setup → Local model).');
+      openModal();
+    }
+  });
+
   $('#btnRawSlide').addEventListener('click', () => {
     state.jsonTab = 'slide';
     syncJsonTabs();
@@ -781,6 +894,7 @@ async function boot() {
 
   // Voice modal
   $('#btnVoiceSettings').addEventListener('click', openModal);
+  $('#btnOpenModelSetup').addEventListener('click', openModal);
   $('#btnCloseModal').addEventListener('click', closeModal);
   $('#voiceModal').addEventListener('click', (e) => {
     if (e.target === $('#voiceModal')) closeModal();
@@ -803,18 +917,54 @@ async function boot() {
       'Hello, I am Astra, your master educator for JEE and NEET. Let us take one concept at a time, and I will keep every answer short enough to listen to.'
     );
   });
+  $('#providerSelect').addEventListener('change', applyProviderPlaceholder);
+
+  $('#btnTestConnection').addEventListener('click', async () => {
+    const btn = $('#btnTestConnection');
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Testing…';
+    const result = await window.AstraUI.testLocalModel({
+      provider: $('#providerSelect').value === 'none' ? '' : $('#providerSelect').value,
+      baseUrl: $('#baseUrlInput').value.trim(),
+      model: $('#modelInput').value.trim(),
+      apiKey: $('#apiKey').value.trim(),
+      direct: $('#optDirect').checked,
+    });
+    btn.disabled = false;
+    btn.textContent = original;
+    const out = $('#connectionResult');
+    out.className = `note ${result.ok ? 'good' : ''}`;
+    out.textContent = result.ok
+      ? `Connected to ${result.provider || result.model || 'local model'}${result.ms ? ` in ${result.ms} ms` : ''}${
+          result.models && result.models.length ? `. Models: ${result.models.slice(0, 6).join(', ')}` : ''
+        }`
+      : `Not reachable — ${result.error || result.message || 'unknown error'}${result.hint ? ` ${result.hint}` : ''}`;
+  });
+
   $('#btnSaveVoice').addEventListener('click', () => {
     settings.autoSpeak = $('#optAutoSpeak').checked;
     settings.autoNarrate = $('#optAutoNarrate').checked;
     settings.handsFree = $('#optHandsFree').checked;
     settings.langHint = $('#optLangHint').checked;
     settings.apiKey = $('#apiKey').value.trim();
+
+    const provider = $('#providerSelect').value;
+    settings.provider = provider === 'none' ? '' : provider;
+    settings.baseUrl = $('#baseUrlInput').value.trim();
+    settings.model = $('#modelInput').value.trim();
+    settings.direct = $('#optDirect').checked;
+
+    settings.preferLocalAudio = $('#optLocalAudio').checked;
+    settings.localVoice = $('#localVoiceSelect').value || '';
+
     applyTtsSettings();
     saveSettings();
     $('#btnAutoSpeak').classList.toggle('on', settings.autoSpeak);
     updateVoicePill();
     closeModal();
-    toast('Voice settings saved.');
+    refreshStatus();
+    toast(settings.provider ? `Local model set: ${settings.model || settings.provider}` : 'Voice settings saved.');
   });
 
   // Keyboard shortcuts
@@ -847,6 +997,90 @@ async function boot() {
   setView('home');
   syncJsonTabs();
 }
+
+/** Refresh the engine pill, local audio status and rail counters. */
+async function refreshStatus() {
+  const [health, audioStatus] = await Promise.all([api('/api/health'), api('/api/audio/status').catch(() => null)]);
+
+  if (audioStatus) {
+    settings.localTts = audioStatus.tts;
+    if (!settings.localVoice && audioStatus.tts.voice) settings.localVoice = audioStatus.tts.voice;
+    if (!audioStatus.tts.local && settings.preferLocalAudio) {
+      settings.preferLocalAudio = false;
+      saveSettings();
+    }
+  }
+
+  const modelLabel = health.model ? `${health.model.provider} · ${health.model.model}` : null;
+  $('#engineLabel').textContent =
+    modelLabel || (settings.provider ? `local model: ${settings.model || settings.provider}` : `offline engine · ${health.doubtRules} rules`);
+  $('#enginePill').classList.toggle('is-off', !modelLabel && !settings.provider);
+  $('#stRules').textContent = health.doubtRules;
+  $('#stDecks').textContent = health.lectures;
+  $('#kpiRules').textContent = health.doubtRules;
+
+  $('#lsModel').textContent = modelLabel || (settings.provider ? `${settings.provider}${settings.model ? ` · ${settings.model}` : ''}` : 'offline');
+  $('#lsTts').textContent = health.tts?.local ? `${health.tts.provider}${health.tts.voice ? ` · ${health.tts.voice}` : ''}` : 'browser';
+  $('#lsStt').textContent = health.stt?.local ? health.stt.provider : health.stt?.provider === 'none' && stt.supported ? 'browser' : 'unavailable';
+
+  const audioLabel = health.tts?.local ? `local voice: ${health.tts.provider}` : 'browser voice';
+  $('#voiceLabel').textContent = `${tts.supported ? audioLabel : 'TTS unavailable'} · ${stt.supported ? 'mic ready' : 'mic unsupported'}`;
+  $('#voicePill').classList.toggle('is-off', !tts.supported && !health.tts?.local);
+  return health;
+}
+
+/** Bridge used by local-models.js (generation panel, practice questions, direct providers). */
+window.AstraUI = {
+  get state() {
+    return state;
+  },
+  get settings() {
+    return settings;
+  },
+  api,
+  toast,
+  escapeHtml,
+  el,
+  renderMathInto,
+  ensureMathDelimiters,
+  speak,
+  speakLocal,
+  tts,
+  stt,
+  saveSettings,
+  refreshStatus,
+  setView,
+  paintDeckGrid,
+  openLecture,
+  openDeckObject(deck) {
+    state.currentDeck = deck;
+    state.slideIndex = 0;
+    state.contextTopic = deck.topic;
+    paintLectureHead();
+    renderSlide();
+    setView('lecture');
+    state.jsonTab = 'lecture';
+    syncJsonTabs();
+  },
+  get decks() {
+    return state.decks;
+  },
+  set decks(list) {
+    state.decks = list;
+  },
+  get catalog() {
+    return state.catalog;
+  },
+  providerConfig,
+  async testLocalModel(cfg = {}) {
+    if (cfg.direct) return window.AstraDirect.test(cfg);
+    try {
+      return await api('/api/providers/test', { method: 'POST', body: JSON.stringify(cfg) });
+    } catch (err) {
+      return { ok: false, error: err.message };
+    }
+  },
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   boot().catch((err) => {

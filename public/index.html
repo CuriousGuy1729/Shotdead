@@ -33,6 +33,7 @@
           <h3>Sessions</h3>
           <button class="nav-btn active" data-view="home"><span class="ico">📚</span> Chapter library</button>
           <button class="nav-btn" data-view="chat"><span class="ico">🎙️</span> Voice doubt tutor</button>
+          <button class="nav-btn" data-view="create"><span class="ico">⚡</span> Create with local model</button>
           <button class="nav-btn" data-view="api"><span class="ico">🧾</span> JSON contract</button>
         </div>
 
@@ -51,6 +52,16 @@
             <button class="chip" data-subject="Chemistry">Chemistry</button>
             <button class="chip" data-subject="Mathematics">Maths</button>
           </div>
+        </div>
+
+        <div class="card">
+          <h3>Local engines</h3>
+          <div id="localStatus" style="font-size:12.5px;color:var(--ink-dim);line-height:1.9">
+            <div>Model: <b id="lsModel">offline</b></div>
+            <div>Voice: <b id="lsTts">browser</b></div>
+            <div>Mic: <b id="lsStt">browser</b></div>
+          </div>
+          <button class="btn small ghost" id="btnOpenModelSetup" style="width:100%;margin-top:8px">Connect a local model</button>
         </div>
 
         <div class="card">
@@ -127,9 +138,30 @@
             <button class="btn" id="btnNext">Next →</button>
             <span class="grow"></span>
             <span class="counter" id="lecCounter">1 / 1</span>
+            <button class="btn small ghost" id="btnPractice">🧪 Practice questions</button>
             <button class="btn small ghost" id="btnAskDoubt">🎙️ Ask a doubt on this slide</button>
             <button class="btn small ghost" id="btnRawSlide">{ } Raw slide JSON</button>
           </div>
+          <section class="practice" id="practicePanel">
+            <div class="practice-head">
+              <div>
+                <h3>Practice questions from your local model</h3>
+                <p id="practiceScore">Click an option to lock in your answer.</p>
+              </div>
+              <div class="composer-row" style="gap:8px">
+                <label class="field-inline" for="practiceCount">Count
+                  <select id="practiceCount">
+                    <option value="3">3</option>
+                    <option value="4" selected>4</option>
+                    <option value="6">6</option>
+                    <option value="8">8</option>
+                  </select>
+                </label>
+                <button class="btn small ghost" id="btnClosePractice">Close</button>
+              </div>
+            </div>
+            <div id="practiceList"></div>
+          </section>
         </section>
 
         <!-- ---------- VOICE CHAT ---------- -->
@@ -161,6 +193,88 @@
           </div>
         </section>
 
+        <!-- ---------- CREATE WITH A LOCAL MODEL ---------- -->
+        <section class="view" id="view-create">
+          <div class="section-head">
+            <h2>Create new material with a local model</h2>
+            <p>
+              Point Astra at Qwen, Llama or Mistral running on your own machine — Ollama, LM Studio,
+              llama.cpp or vLLM. It writes a full LECTURE_MODE deck, validates and repairs it against the
+              contract, and files it into the library beside the built-in decks.
+            </p>
+          </div>
+
+          <div class="card" id="genPanel" style="margin-bottom:14px">
+            <h3>New lecture deck</h3>
+            <div class="gen-grid">
+              <div class="field" style="grid-column:1/-1">
+                <label for="genTopic">Topic</label>
+                <input type="text" id="genTopic" placeholder="e.g. Rotational motion — moment of inertia, torque and angular momentum" />
+              </div>
+              <div class="field">
+                <label for="genSubject">Subject</label>
+                <select id="genSubject">
+                  <option>Physics</option>
+                  <option>Chemistry</option>
+                  <option>Mathematics</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="genExam">Target exam</label>
+                <select id="genExam">
+                  <option>JEE Main</option>
+                  <option>JEE Advanced</option>
+                  <option>NEET</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="genSlides">Slides</label>
+                <select id="genSlides">
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7" selected>7</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+              <div class="field gen-actions">
+                <label>&nbsp;</label>
+                <div class="composer-row">
+                  <button class="btn primary" id="btnGenerateDeck">⚡ Generate deck</button>
+                  <button class="btn" id="btnSaveDeck" disabled>💾 Save to library</button>
+                </div>
+              </div>
+            </div>
+            <div class="gen-log" id="genLog">
+              No local model selected yet — open <b>Voice setup → Local model</b>, pick Ollama (or LM Studio), then <b>Test connection</b>.
+            </div>
+            <div id="genWarnings"></div>
+            <div class="gen-meta" id="genMeta"></div>
+          </div>
+
+          <div class="card">
+            <h3>How it works</h3>
+            <pre class="json" style="max-height:none">POST /api/generate/lecture
+  {"topic":"...","subject":"Physics","targetExam":"JEE Advanced","slideCount":7,"save":true,
+   "provider":"ollama","baseUrl":"http://127.0.0.1:11434","model":"qwen2.5:3b-instruct"}
+
+  -> the model is asked for strict LECTURE_MODE JSON
+  -> fenced/partial output is extracted, validated and repaired (server/schema.js)
+  -> voiceScript is forced TTS-safe: LaTeX is converted to phonetic text
+  -> one automatic repair round-trip if the first answer breaks the contract
+  -> deck is saved to public/content/&lt;id&gt;.json and appears in the library
+
+POST /api/generate/practice   {"topic":"...","targetExam":"NEET","count":4,"focus":"..."}
+POST /api/generate/validate   {"rawModelOutput":"...","kind":"lecture|practice"}   (browser-direct transport)
+POST /api/decks               {"deck":{...}}                                       (save a previewed deck)</pre>
+            <p class="note" style="margin-top:10px">
+              <b>Browser-direct mode</b> (Voice setup) makes the page itself call your local model —
+              the right choice when Astra is served from a remote host but Ollama runs on your PC.
+              Set <code style="font-family:var(--mono)">OLLAMA_ORIGINS=*</code> so Ollama accepts the request.
+            </p>
+          </div>
+        </section>
+
         <!-- ---------- API CONTRACT ---------- -->
         <section class="view" id="view-api">
           <div class="section-head">
@@ -174,7 +288,17 @@ GET  /api/catalog                    -&gt; all decks with slide counts
 GET  /api/lecture?id=&lt;deck-id&gt;       -&gt; MODE 1: LECTURE_MODE JSON
 POST /api/doubt  {"message": "...", "history": [...], "contextTopic": "..."}
                                      -&gt; MODE 2: VOICE_CHAT_MODE JSON
-GET  /api/schema                     -&gt; both contracts + a live example</pre>
+GET  /api/schema                     -&gt; both contracts + a live example
+
+GET  /api/providers/status           -&gt; which local model the server can reach
+POST /api/providers/test             -&gt; probe an endpoint (also works browser-direct)
+POST /api/generate/lecture           -&gt; local model writes a new deck (+ validate/repair/save)
+POST /api/generate/practice          -&gt; local model writes MCQs for a topic or slide
+POST /api/generate/validate          -&gt; validate raw model output against a contract
+POST /api/decks                      -&gt; save a previewed deck into the library
+POST /api/audio/tts                  -&gt; local neural TTS (Piper / espeak-ng) -&gt; WAV
+POST /api/audio/stt                  -&gt; local Whisper -&gt; text
+GET  /api/audio/status               -&gt; detected local audio engines</pre>
             <p class="note" style="margin:10px 0 0">
               Live-model mode: set <code style="font-family:var(--mono)">OPENAI_API_KEY</code> (optionally
               <code style="font-family:var(--mono)">OPENAI_BASE_URL</code> and <code style="font-family:var(--mono)">ASTRA_MODEL</code>)
@@ -259,9 +383,71 @@ GET  /api/schema                     -&gt; both contracts + a live example</pre>
           </div>
         </div>
 
+        <h2 style="font-size:15px;margin:22px 0 4px">Local model (Qwen / Llama / Mistral)</h2>
+        <p style="margin:0 0 14px;color:var(--ink-faint);font-size:12.5px">
+          Used for doubt answers, generated decks and practice questions. Nothing leaves your machine when
+          the endpoint is local. With no model selected Astra answers from its offline knowledge base.
+        </p>
+
         <div class="field">
-          <label for="apiKey">Optional — live model key (stored in this browser tab only)</label>
-          <input type="password" id="apiKey" placeholder="sk-…  (leave blank to use the offline engine)" />
+          <label for="providerSelect">Provider</label>
+          <select id="providerSelect">
+            <option value="none">None — offline knowledge base</option>
+            <option value="ollama">Ollama</option>
+            <option value="lmstudio">LM Studio</option>
+            <option value="llamacpp">llama.cpp server</option>
+            <option value="vllm">vLLM</option>
+            <option value="openai-compatible">OpenAI-compatible (custom URL)</option>
+            <option value="openai">OpenAI (cloud)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="baseUrlInput">Base URL</label>
+          <input type="text" id="baseUrlInput" placeholder="http://127.0.0.1:11434" />
+        </div>
+
+        <div class="field">
+          <label for="modelInput">Model</label>
+          <input type="text" id="modelInput" placeholder="qwen2.5:3b-instruct" />
+        </div>
+
+        <div class="field">
+          <label>Transport</label>
+          <div class="switch-row">
+            <span>Browser-direct (the page calls the model itself — use when Astra is served remotely but the model runs on this PC)</span>
+            <label class="switch"><input type="checkbox" id="optDirect" /><i></i></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="apiKey">API key (optional — local servers accept any value)</label>
+          <input type="password" id="apiKey" placeholder="leave blank for Ollama / LM Studio" />
+        </div>
+
+        <div class="field">
+          <button class="btn small" id="btnTestConnection">🔌 Test connection</button>
+          <div class="note" id="connectionResult" style="margin-top:10px;display:block">Not tested yet.</div>
+        </div>
+
+        <h2 style="font-size:15px;margin:22px 0 4px">Local audio engine</h2>
+        <p style="margin:0 0 14px;color:var(--ink-faint);font-size:12.5px">
+          Astra can speak with a local neural voice (Piper) instead of the browser's. Detected automatically —
+          see <code style="font-family:var(--mono)">local-models/setup-piper.sh</code>.
+        </p>
+        <div class="field">
+          <label>Status</label>
+          <div class="note" id="localAudioInfo">checking…</div>
+        </div>
+        <div class="field">
+          <label for="localVoiceSelect">Local voice</label>
+          <select id="localVoiceSelect"></select>
+        </div>
+        <div class="field">
+          <div class="switch-row">
+            <span>Prefer the local voice over browser speech synthesis</span>
+            <label class="switch"><input type="checkbox" id="optLocalAudio" /><i></i></label>
+          </div>
         </div>
 
         <div class="field">
@@ -282,5 +468,6 @@ GET  /api/schema                     -&gt; both contracts + a live example</pre>
     <script src="/vendor/katex/contrib/auto-render.min.js"></script>
     <script src="/js/speech.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/local-models.js"></script>
   </body>
 </html>

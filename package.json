@@ -2,15 +2,16 @@
   "name": "astra-tutor",
   "version": "1.0.0",
   "private": true,
-  "description": "Astra - AI Master Educator for JEE (Main & Advanced) and NEET. Lecture mode + voice doubt-chat mode, strict JSON output contracts.",
+  "description": "Astra - AI Master Educator for JEE (Main & Advanced) and NEET. Lecture + voice doubt-chat JSON contracts, driven by a local model (Qwen via Ollama/LM Studio/llama.cpp/vLLM) or the offline knowledge base, with local Piper TTS and Whisper STT support.",
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node test/validate-content.js && node test/smoke.js",
+    "test": "node test/validate-content.js && node test/generate.test.js && node test/smoke.js",
     "test:content": "node test/validate-content.js",
-    "test:smoke": "node test/smoke.js"
+    "test:smoke": "node test/smoke.js",
+    "test:local-model": "node test/generate.test.js"
   },
   "engines": {
     "node": ">=18"

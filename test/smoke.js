@@ -230,6 +230,35 @@ async function ensureServer() {
   await waitFor(() => document.querySelectorAll('.msg.astra').length > countBefore, 'quick-chip reply');
   ok('quick chip asks a doubt', true);
 
+  // ---------- local model integration surface ----------
+  ok('local-models.js loaded', typeof window.AstraDirect === 'object' && typeof window.AstraDirect.chat === 'function');
+  ok('AstraUI bridge exposed', typeof window.AstraUI === 'object' && typeof window.AstraUI.openLecture === 'function');
+  ok('direct provider resolves Ollama defaults', window.AstraDirect.resolve({ provider: 'ollama' }).baseUrl === 'http://127.0.0.1:11434');
+  ok('direct provider appends /v1 for LM Studio', window.AstraDirect.resolve({ provider: 'lmstudio' }).baseUrl.endsWith('/v1'));
+
+  document.querySelector('[data-view="create"]').click();
+  await waitFor(() => document.querySelector('#view-create').classList.contains('active'), 'create view');
+  ok('create view opens', true);
+  ok('generate form present', !!document.querySelector('#genTopic') && !!document.querySelector('#btnGenerateDeck'));
+
+  document.querySelector('#genTopic').value = 'Rotational motion';
+  document.querySelector('#btnGenerateDeck').dispatchEvent(new window.MouseEvent('click', { bubbles: true }));
+  await sleep(150);
+  ok('generate without a model explains how to connect one', /No local model selected/i.test(document.querySelector('#genLog').textContent));
+
+  document.querySelector('#btnVoiceSettings').click();
+  ok('local model settings rendered', !!document.querySelector('#providerSelect') && !!document.querySelector('#baseUrlInput') && !!document.querySelector('#modelInput'));
+  ok('browser-direct toggle rendered', !!document.querySelector('#optDirect'));
+  ok('local audio section rendered', !!document.querySelector('#optLocalAudio') && !!document.querySelector('#localAudioInfo'));
+  document.querySelector('#providerSelect').value = 'ollama';
+  document.querySelector('#providerSelect').dispatchEvent(new window.Event('change'));
+  ok('provider change sets the default base URL placeholder', document.querySelector('#baseUrlInput').placeholder.includes('11434'));
+  document.querySelector('#btnCloseModal').click();
+
+  // practice panel hooks exist on the lecture view
+  ok('practice button wired', !!document.querySelector('#btnPractice'));
+  ok('practice panel present', !!document.querySelector('#practicePanel') && !!document.querySelector('#practiceList'));
+
   // ---------- views & filters ----------
   document.querySelector('[data-view="api"]').click();
   await waitFor(() => document.querySelector('#view-api').classList.contains('active'), 'api view');
